@@ -1,0 +1,615 @@
+/**
+ * Global Enterprises - Industrial Core Box & Exploration Drilling Solutions
+ * Core Interactive Logic & Dynamic Features
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+
+  // -------------------------------------------------------------------------
+  // 1. Navigation & Header Scroll Behavior
+  // -------------------------------------------------------------------------
+  const mainHeader = document.getElementById('mainHeader');
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const drawerClose = document.getElementById('drawerClose');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const desktopNavLinks = document.querySelectorAll('.desktop-nav .nav-link');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+  // Sticky header background transition
+  const handleScroll = () => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    if (scrollY > 50) {
+      mainHeader.classList.add('scrolled');
+    } else {
+      mainHeader.classList.remove('scrolled');
+    }
+
+    // Scroll to top button visibility
+    if (scrollY > 400) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  // Scroll to top action
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Mobile Drawer Toggle
+  const openMobileMenu = () => {
+    mobileDrawer.classList.add('active');
+    mobileOverlay.classList.add('active');
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMobileMenu = () => {
+    mobileDrawer.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
+  if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+  if (drawerClose) drawerClose.addEventListener('click', closeMobileMenu);
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  });
+
+  // Active Navigation link on scroll (IntersectionObserver)
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const observerOptions = {
+    root: null,
+    rootMargin: '-30% 0px -60% 0px',
+    threshold: 0
+  };
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        desktopNavLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(sec => sectionObserver.observe(sec));
+
+  // -------------------------------------------------------------------------
+  // 2. Product Category Tabs Switcher
+  // -------------------------------------------------------------------------
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTabId = btn.getAttribute('data-tab');
+
+      // Update button active state
+      tabButtons.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      // Update content panels
+      tabContents.forEach(content => {
+        if (content.id === targetTabId) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // 3. Multi-Image Product Sliders
+  // -------------------------------------------------------------------------
+  const sliders = document.querySelectorAll('.custom-slider');
+
+  sliders.forEach(slider => {
+    const slides = slider.querySelectorAll('.slide');
+    const prevBtn = slider.querySelector('.slider-nav-btn.prev');
+    const nextBtn = slider.querySelector('.slider-nav-btn.next');
+    const dotsContainer = slider.querySelector('.slider-dots');
+    let currentIndex = 0;
+    let autoSlideInterval = null;
+
+    if (!slides.length) return;
+
+    // Create dots
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (idx === 0) dot.classList.add('active');
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(idx);
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.dot');
+
+    const goToSlide = (index) => {
+      slides[currentIndex].classList.remove('active');
+      dots[currentIndex].classList.remove('active');
+      currentIndex = (index + slides.length) % slides.length;
+      slides[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(currentIndex + 1);
+      });
+    }
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    const handleSwipe = () => {
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          goToSlide(currentIndex - 1);
+        } else {
+          goToSlide(currentIndex + 1);
+        }
+      }
+    };
+
+    // Auto Advance Carousel
+    const startAutoPlay = () => {
+      autoSlideInterval = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 5000);
+    };
+
+    const stopAutoPlay = () => {
+      clearInterval(autoSlideInterval);
+    };
+
+    slider.addEventListener('mouseenter', stopAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
+    startAutoPlay();
+  });
+
+  // -------------------------------------------------------------------------
+  // 4. Interactive Core Box Requirement Calculator
+  // -------------------------------------------------------------------------
+  const drillModelSelect = document.getElementById('drillModelSelect');
+  const trayMaterialSelect = document.getElementById('trayMaterialSelect');
+  const metersDrilledInput = document.getElementById('metersDrilledInput');
+  const metersValueDisplay = document.getElementById('metersValueDisplay');
+  const calcTraysCount = document.getElementById('calcTraysCount');
+  const calcTotalWeight = document.getElementById('calcTotalWeight');
+  const calcLidsCount = document.getElementById('calcLidsCount');
+  const applyCalcToQuoteBtn = document.getElementById('applyCalcToQuoteBtn');
+
+  const updateCalculations = () => {
+    if (!drillModelSelect || !metersDrilledInput) return;
+
+    const meters = parseInt(metersDrilledInput.value, 10);
+    metersValueDisplay.textContent = `${meters} m`;
+
+    const selectedOption = drillModelSelect.options[drillModelSelect.selectedIndex];
+    const capacityPerTray = parseFloat(selectedOption.getAttribute('data-capacity')) || 5;
+    const isPlastic = trayMaterialSelect.value === 'plastic';
+
+    // Unit weight
+    const metalWeight = parseFloat(selectedOption.getAttribute('data-weight')) || 5.5;
+    const plasticWeight = parseFloat(selectedOption.getAttribute('data-plastic-weight')) || 2.4;
+    const unitWeight = isPlastic ? plasticWeight : metalWeight;
+
+    // Calculate Trays
+    const traysNeeded = Math.ceil(meters / capacityPerTray);
+    const totalTareWeight = (traysNeeded * unitWeight).toFixed(1);
+
+    calcTraysCount.textContent = traysNeeded.toLocaleString('en-IN');
+    calcTotalWeight.textContent = `${parseFloat(totalTareWeight).toLocaleString('en-IN')} kg`;
+    calcLidsCount.textContent = traysNeeded.toLocaleString('en-IN');
+  };
+
+  if (drillModelSelect) drillModelSelect.addEventListener('change', updateCalculations);
+  if (trayMaterialSelect) trayMaterialSelect.addEventListener('change', updateCalculations);
+  if (metersDrilledInput) metersDrilledInput.addEventListener('input', updateCalculations);
+
+  updateCalculations();
+
+  // Transfer Calculated Values to RFQ Form
+  if (applyCalcToQuoteBtn) {
+    applyCalcToQuoteBtn.addEventListener('click', () => {
+      const meters = metersDrilledInput.value;
+      const model = drillModelSelect.value;
+      const material = trayMaterialSelect.value === 'plastic' ? 'Plastic' : 'Galvanized Steel';
+      const trays = calcTraysCount.textContent;
+      const weight = calcTotalWeight.textContent;
+
+      // Fill in contact form fields
+      const productSelect = document.getElementById('productSelect');
+      const quantityInput = document.getElementById('quantity');
+      const messageInput = document.getElementById('message');
+
+      if (productSelect) {
+        // Attempt to match model option
+        for (let i = 0; i < productSelect.options.length; i++) {
+          if (productSelect.options[i].value.includes(model)) {
+            productSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+
+      if (quantityInput) {
+        quantityInput.value = trays.replace(/,/g, '');
+      }
+
+      if (messageInput) {
+        messageInput.value = `[Calculator Estimate]: Requesting quote for ${trays} ${material} Core Trays (${model} Model) to cover ${meters}m of drilling (approx tare weight ${weight}). Please include delivery charges to our warehouse.`;
+      }
+
+      // Smooth scroll to contact section
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+        // Flash subtle focus effect on form
+        const formPanel = document.querySelector('.contact-form-panel');
+        if (formPanel) {
+          formPanel.style.outline = '2px solid #f15a24';
+          setTimeout(() => { formPanel.style.outline = 'none'; }, 2000);
+        }
+      }
+    });
+  }
+
+  // Quick Quote Buttons from product cards
+  const quickQuoteButtons = document.querySelectorAll('.quick-quote-btn, .product-action-row .btn-primary');
+  quickQuoteButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const model = btn.getAttribute('data-model');
+      if (model) {
+        const productSelect = document.getElementById('productSelect');
+        const messageInput = document.getElementById('message');
+        if (productSelect) {
+          for (let i = 0; i < productSelect.options.length; i++) {
+            if (productSelect.options[i].value.includes(model) || model.includes(productSelect.options[i].value.split(' ')[0])) {
+              productSelect.selectedIndex = i;
+              break;
+            }
+          }
+        }
+        if (messageInput) {
+          messageInput.value = `Hello Global Enterprises, I am inquiring about pricing and dispatch timelines for ${model}.`;
+        }
+      }
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // 5. Accordion / FAQ in Industrial Services
+  // -------------------------------------------------------------------------
+  const faqQuestions = document.querySelectorAll('.faq-question');
+
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const answer = question.nextElementSibling;
+      const isActive = question.classList.contains('active');
+
+      // Close open siblings in the same accordion
+      const parentAccordion = question.closest('.faq-accordion');
+      if (parentAccordion) {
+        const siblings = parentAccordion.querySelectorAll('.faq-question');
+        siblings.forEach(s => {
+          if (s !== question) {
+            s.classList.remove('active');
+            if (s.nextElementSibling) {
+              s.nextElementSibling.style.maxHeight = null;
+            }
+          }
+        });
+      }
+
+      if (!isActive) {
+        question.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        question.classList.remove('active');
+        answer.style.maxHeight = null;
+      }
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // 6. Gallery Filter Chips
+  // -------------------------------------------------------------------------
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const galleryCards = document.querySelectorAll('.gallery-card');
+
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const filter = chip.getAttribute('data-filter');
+
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      galleryCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 250);
+        }
+      });
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // 7. Fullscreen Lightbox Modal
+  // -------------------------------------------------------------------------
+  const lightboxModal = document.getElementById('lightboxModal');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let currentGalleryList = [];
+  let currentLightboxIndex = 0;
+
+  const gatherTriggers = () => {
+    return Array.from(document.querySelectorAll('.lightbox-trigger, .gallery-card img'));
+  };
+
+  const openLightbox = (imgElement) => {
+    currentGalleryList = gatherTriggers();
+    currentLightboxIndex = currentGalleryList.indexOf(imgElement);
+
+    if (currentLightboxIndex === -1) {
+      currentGalleryList = [imgElement];
+      currentLightboxIndex = 0;
+    }
+
+    updateLightboxContent();
+    lightboxModal.classList.add('active');
+    lightboxModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const updateLightboxContent = () => {
+    const activeItem = currentGalleryList[currentLightboxIndex];
+    if (!activeItem) return;
+
+    lightboxImg.src = activeItem.src || activeItem.getAttribute('src');
+    const title = activeItem.getAttribute('data-title') || activeItem.getAttribute('alt') || 'Global Enterprises';
+    lightboxCaption.textContent = title;
+  };
+
+  const closeLightbox = () => {
+    lightboxModal.classList.remove('active');
+    lightboxModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  const nextLightboxImage = () => {
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryList.length;
+    updateLightboxContent();
+  };
+
+  const prevLightboxImage = () => {
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryList.length) % currentGalleryList.length;
+    updateLightboxContent();
+  };
+
+  // Attach click listeners to all lightbox triggers
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.lightbox-trigger, .gallery-card');
+    if (trigger) {
+      const img = trigger.tagName === 'IMG' ? trigger : trigger.querySelector('img');
+      if (img) openLightbox(img);
+    }
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+  if (lightboxNext) lightboxNext.addEventListener('click', nextLightboxImage);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightboxImage);
+
+  // Keyboard navigation for Lightbox
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxModal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextLightboxImage();
+    if (e.key === 'ArrowLeft') prevLightboxImage();
+  });
+
+  // -------------------------------------------------------------------------
+  // 8. Live Video Modal
+  // -------------------------------------------------------------------------
+  const videoModal = document.getElementById('videoModal');
+  const videoBackdrop = document.getElementById('videoBackdrop');
+  const videoClose = document.getElementById('videoClose');
+  const openVideoBtn = document.getElementById('openVideoBtn');
+  const videoBannerTrigger = document.getElementById('videoBannerTrigger');
+  const liveVideoPlayer = document.getElementById('liveVideoPlayer');
+
+  const openVideoModal = () => {
+    if (!videoModal) return;
+    videoModal.classList.add('active');
+    videoModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (liveVideoPlayer) {
+      liveVideoPlayer.currentTime = 0;
+      liveVideoPlayer.play().catch(() => {});
+    }
+  };
+
+  const closeVideoModal = () => {
+    if (!videoModal) return;
+    videoModal.classList.remove('active');
+    videoModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (liveVideoPlayer) {
+      liveVideoPlayer.pause();
+    }
+  };
+
+  if (openVideoBtn) openVideoBtn.addEventListener('click', openVideoModal);
+  if (videoBannerTrigger) videoBannerTrigger.addEventListener('click', openVideoModal);
+  if (videoClose) videoClose.addEventListener('click', closeVideoModal);
+  if (videoBackdrop) videoBackdrop.addEventListener('click', closeVideoModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (videoModal && videoModal.classList.contains('active') && e.key === 'Escape') {
+      closeVideoModal();
+    }
+  });
+
+  // -------------------------------------------------------------------------
+  // 9. Contact / RFQ Form - Direct WhatsApp Auto-Fill Action
+  // -------------------------------------------------------------------------
+  const contactForm = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
+
+  const sendWhatsAppQuotation = (e) => {
+    if (e) e.preventDefault();
+
+    const firstName = contactForm ? contactForm.querySelector('#firstName') : document.getElementById('firstName');
+    const lastName = contactForm ? contactForm.querySelector('#lastName') : document.getElementById('lastName');
+    const email = contactForm ? contactForm.querySelector('#email') : document.getElementById('email');
+    const phone = contactForm ? contactForm.querySelector('#phone') : document.getElementById('phone');
+    const productSelect = contactForm ? contactForm.querySelector('#productSelect') : document.getElementById('productSelect');
+    const quantity = contactForm ? contactForm.querySelector('#quantity') : document.getElementById('quantity');
+    const message = contactForm ? contactForm.querySelector('#message') : document.getElementById('message');
+
+    // Extract values with graceful fallbacks
+    const fName = (firstName && firstName.value.trim()) || '';
+    const lName = (lastName && lastName.value.trim()) || '';
+    const clientName = (fName || lName) ? `${fName} ${lName}`.trim() : 'Prospective Client';
+    const clientEmail = (email && email.value.trim()) || 'Not provided';
+    const clientPhone = (phone && phone.value.trim()) || 'Not provided';
+    const selectedProduct = (productSelect && productSelect.value) || 'GI Core Box NQ (5 Row) - Standard';
+    const orderQty = (quantity && quantity.value.trim()) || '100';
+    const clientMsg = (message && message.value.trim()) || 'Please provide quotation, dimensional drawings, and dispatch schedule to our project site.';
+
+    // Construct cleanly formatted WhatsApp message
+    const waText = 
+`Hello Global Enterprises,
+
+I am requesting an official quotation with the following project details:
+
+📋 *QUOTATION REQUEST DETAILS*
+----------------------------------------
+👤 *Name:* ${clientName}
+📧 *Email:* ${clientEmail}
+📞 *Phone / WhatsApp:* ${clientPhone}
+📦 *Product Model:* ${selectedProduct}
+🔢 *Estimated Quantity:* ${orderQty} Units
+
+📝 *Requirements / Message:*
+${clientMsg}
+----------------------------------------
+_Inquiry sent via globalcorebox.in_`;
+
+    const whatsappNumber = '919521159531';
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(waText)}`;
+
+    // Show success alert on page
+    if (formSuccess) {
+      formSuccess.innerHTML = `
+        <svg viewBox="0 0 20 20" width="24" height="24" fill="#10b981" style="flex-shrink:0;">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <div style="flex:1;">
+          <strong style="color:#065f46; font-size:1.05rem; display:block; margin-bottom:0.25rem;">WhatsApp Chat Opened!</strong>
+          <span style="color:#047857; font-size:0.9rem;">Your quotation details for <strong>${selectedProduct} (${orderQty} Units)</strong> have been auto-filled in WhatsApp.</span>
+          <div style="margin-top:0.75rem;">
+            <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background:#25d366; color:#ffffff; font-weight:700; text-transform:none; border-radius:9999px; display:inline-flex; align-items:center; gap:0.5rem; padding:0.5rem 1.25rem; box-shadow:0 3px 10px rgba(37,211,102,0.4);">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.42 0-2.82-.37-4.06-1.07l-.29-.17-3.11.82.83-3.03-.19-.3a8.19 8.19 0 01-1.26-4.48c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.02 2.6c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.12-.23-.19-.48-.31z"/></svg>
+              Reopen WhatsApp Chat
+            </a>
+          </div>
+        </div>
+      `;
+      formSuccess.classList.add('visible');
+    }
+
+    if (formError) {
+      formError.classList.remove('visible');
+    }
+
+    // Open WhatsApp SYNCHRONOUSLY directly from the user's click gesture
+    // (Bypasses popup blocker because it is not delayed by setTimeout)
+    const newWindow = window.open(whatsappUrl, '_blank');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      // In case browser policy forces strict same-tab redirect
+      window.location.href = whatsappUrl;
+    }
+  };
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', sendWhatsAppQuotation);
+  }
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (e) => {
+      // If inside a form, submit will handle it, but clicking directly also ensures execution
+      if (!contactForm) {
+        sendWhatsAppQuotation(e);
+      }
+    });
+  }
+
+});
