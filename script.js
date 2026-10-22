@@ -611,5 +611,37 @@ _Inquiry sent via globalcorebox.in_`;
       }
     });
   }
+  // -------------------------------------------------------------------------
+  // Product Card Thumbnail Switcher
+  // -------------------------------------------------------------------------
+  document.querySelectorAll('.product-item-card').forEach(card => {
+    const mainImg = card.querySelector('.main-display-img');
+    const thumbs = card.querySelectorAll('.thumb-item');
+    if (!mainImg || thumbs.length === 0) return;
+
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        mainImg.src = thumb.src;
+        mainImg.alt = thumb.alt;
+      });
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // Mobile / Touch dropdown toggle for navigation
+  // -------------------------------------------------------------------------
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdownMenu = document.querySelector('.nav-dropdown-menu');
+  if (dropdownToggle && dropdownMenu) {
+    dropdownToggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 1080) {
+        e.preventDefault();
+        dropdownMenu.classList.toggle('touch-open');
+      }
+    });
+  }
 
 });
+
