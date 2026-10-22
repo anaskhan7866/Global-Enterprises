@@ -2196,6 +2196,36 @@ select.form-control option {
   flex-wrap: wrap;
 }
 
+.section-brochure .btn-outline,
+.brochure-buttons .btn-outline,
+.brochure-btn-outline {
+  color: #ffffff !important;
+  border: 2px solid var(--color-primary) !important;
+  background-color: rgba(241, 90, 36, 0.12) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-weight: 700 !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.section-brochure .btn-outline svg,
+.brochure-buttons .btn-outline svg,
+.brochure-btn-outline svg {
+  fill: currentColor !important;
+  color: inherit !important;
+}
+
+.section-brochure .btn-outline:hover,
+.brochure-buttons .btn-outline:hover,
+.brochure-btn-outline:hover {
+  background-color: var(--color-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 4px 20px rgba(241, 90, 36, 0.45) !important;
+  transform: translateY(-2px);
+}
+
 .brochure-preview {
   display: flex;
   justify-content: center;
