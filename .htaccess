@@ -1,0 +1,31 @@
+# Hostinger (LiteSpeed / Apache) Clean URL Configuration
+# Place this file in your public_html directory
+
+Options -MultiViews +FollowSymLinks
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. 301 Redirect /index.html to the root domain /
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html[?\s] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # 2. 301 Redirect any direct browser request containing .html to the clean extensionless URL
+  # (e.g., /gi-core-boxes.html -> /gi-core-boxes)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^\s\?]+)\.html[\s\?] [NC]
+  RewriteRule ^ /%1 [R=301,L,NE]
+
+  # 3. Explicit internal rewrites for product pages
+  RewriteRule ^gi-core-boxes/?$ gi-core-boxes.html [L,QSA]
+  RewriteRule ^plastic-core-boxes/?$ plastic-core-boxes.html [L,QSA]
+
+  # 4. General internal rewrite: silently serve any existing .html file without extension
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.*)/?$ $1.html [L,QSA]
+</IfModule>
+
+# Custom 404 Error Document
+ErrorDocument 404 /404.html
+

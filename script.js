@@ -333,39 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // -------------------------------------------------------------------------
-  // 5. Accordion / FAQ in Industrial Services
-  // -------------------------------------------------------------------------
-  const faqQuestions = document.querySelectorAll('.faq-question');
-
-  faqQuestions.forEach(question => {
-    question.addEventListener('click', () => {
-      const answer = question.nextElementSibling;
-      const isActive = question.classList.contains('active');
-
-      // Close open siblings in the same accordion
-      const parentAccordion = question.closest('.faq-accordion');
-      if (parentAccordion) {
-        const siblings = parentAccordion.querySelectorAll('.faq-question');
-        siblings.forEach(s => {
-          if (s !== question) {
-            s.classList.remove('active');
-            if (s.nextElementSibling) {
-              s.nextElementSibling.style.maxHeight = null;
-            }
-          }
-        });
-      }
-
-      if (!isActive) {
-        question.classList.add('active');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      } else {
-        question.classList.remove('active');
-        answer.style.maxHeight = null;
-      }
-    });
-  });
 
   // -------------------------------------------------------------------------
   // 6. Gallery Filter Chips
@@ -811,7 +778,7 @@ _Inquiry sent via globalcorebox.in_`;
   });
 
   // -------------------------------------------------------------------------
-  // Mobile / Touch dropdown toggle for navigation
+  // 11. Mobile / Touch dropdown toggle for navigation
   // -------------------------------------------------------------------------
   const dropdownToggle = document.querySelector('.dropdown-toggle');
   const dropdownMenu = document.querySelector('.nav-dropdown-menu');
@@ -824,5 +791,51 @@ _Inquiry sent via globalcorebox.in_`;
     });
   }
 
+  // -------------------------------------------------------------------------
+  // 12. Clean URL Routing & Slugs (gi-core-boxes & plastic-core-boxes)
+  // -------------------------------------------------------------------------
+  const applyCleanUrls = () => {
+    try {
+      const p = window.location.pathname;
+      const search = window.location.search || '';
+      const hash = window.location.hash || '';
+
+      if (p.endsWith('gi-core-boxes.html')) {
+        const cleanPath = p.replace(/\.html$/, '');
+        window.history.replaceState(null, '', cleanPath + search + hash);
+      } else if (p.endsWith('plastic-core-boxes.html')) {
+        const cleanPath = p.replace(/\.html$/, '');
+        window.history.replaceState(null, '', cleanPath + search + hash);
+      }
+    } catch (e) {
+      // Gracefully ignored if history.replaceState is restricted in certain sandboxed environments
+    }
+  };
+
+  applyCleanUrls();
+
+  window.addEventListener('hashchange', applyCleanUrls);
+  window.addEventListener('popstate', applyCleanUrls);
+
+  // Local file:/// protocol click fallback so direct filesystem opening works seamlessly
+  if (window.location.protocol === 'file:') {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+      if (href === '/' || href.startsWith('/#')) {
+        e.preventDefault();
+        window.location.href = 'index.html' + (href.indexOf('#') !== -1 ? '#' + href.split('#')[1] : '');
+      } else if (href === 'gi-core-boxes' || href.startsWith('gi-core-boxes#')) {
+        e.preventDefault();
+        window.location.href = href.replace(/^gi-core-boxes/, 'gi-core-boxes.html');
+      } else if (href === 'plastic-core-boxes' || href.startsWith('plastic-core-boxes#')) {
+        e.preventDefault();
+        window.location.href = href.replace(/^plastic-core-boxes/, 'plastic-core-boxes.html');
+      }
+    });
+  }
 });
+
 

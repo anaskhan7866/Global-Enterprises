@@ -3,11 +3,22 @@
 
 <head>
   <meta charset="UTF-8">
+  <script>
+    (function () {
+      try {
+        var p = window.location.pathname;
+        if (p.endsWith('plastic-core-boxes.html')) {
+          var clean = p.replace(/\.html$/, '');
+          window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plastic Core Trays &amp; Polymer Core Boxes | Global Enterprises</title>
   <meta name="description"
     content="Discover high-impact UV-stabilized Plastic Core Trays and Polymer Core Boxes for diamond core drilling. Lightweight, non-magnetic, chemical-resistant trays for BQ, NQ, HQ, and PQ cores.">
-  <link rel="canonical" href="https://globalcorebox.in/plastic-core-boxes.html">
+  <link rel="canonical" href="https://globalcorebox.in/plastic-core-boxes">
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
@@ -70,7 +81,7 @@
   <!-- Primary Header & Navigation -->
   <header class="main-header" id="mainHeader">
     <div class="container header-container">
-      <a href="index.html#hero" class="brand-logo" aria-label="Global Enterprises Home">
+      <a href="/#hero" class="brand-logo" aria-label="Global Enterprises Home">
         <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="brand-logo-img">
         <span class="sr-only">Global Enterprises</span>
       </a>
@@ -78,9 +89,9 @@
       <!-- Desktop Navigation Menu -->
       <nav class="desktop-nav" aria-label="Primary Navigation">
         <ul class="nav-list" role="menubar">
-          <li class="nav-item" role="none"><a href="index.html#hero" class="nav-link" role="menuitem">Home</a></li>
+          <li class="nav-item" role="none"><a href="/#hero" class="nav-link" role="menuitem">Home</a></li>
           <li class="nav-item has-dropdown" role="none">
-            <a href="index.html#products" class="nav-link dropdown-toggle active" role="menuitem" aria-haspopup="true"
+            <a href="gi-core-boxes" class="nav-link dropdown-toggle active" role="menuitem" aria-haspopup="true"
               aria-expanded="false">
               <span>Products</span>
               <svg class="dropdown-chevron" viewBox="0 0 20 20" width="14" height="14" fill="currentColor">
@@ -92,7 +103,7 @@
             <div class="nav-dropdown-menu" role="menu">
               <div class="dropdown-inner-grid">
                 <!-- GI Core Box Item -->
-                <a href="gi-core-boxes.html" class="dropdown-product-card" role="menuitem">
+                <a href="gi-core-boxes" class="dropdown-product-card" role="menuitem">
                   <div class="dp-card-img">
                     <img src="assets/images/Product3-removebg.png" alt="GI Core Box">
                   </div>
@@ -106,7 +117,7 @@
                 </a>
 
                 <!-- Plastic Core Tray Item -->
-                <a href="plastic-core-boxes.html" class="dropdown-product-card" role="menuitem">
+                <a href="plastic-core-boxes" class="dropdown-product-card" role="menuitem">
                   <div class="dp-card-img dp-card-placeholder">
                     <div class="empty-image-box">
                       <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor"
@@ -132,14 +143,14 @@
           </li>
 
           <li class="nav-item" role="none">
-            <a href="index.html#calculator" class="nav-link" role="menuitem">
+            <a href="/#calculator" class="nav-link" role="menuitem">
               <span>Calculator</span>
               <span class="nav-pill-badge">Tool</span>
             </a>
           </li>
-          <li class="nav-item" role="none"><a href="index.html#visuals" class="nav-link" role="menuitem">Visuals</a>
+          <li class="nav-item" role="none"><a href="/#visuals" class="nav-link" role="menuitem">Visuals</a>
           </li>
-          <li class="nav-item" role="none"><a href="index.html#about" class="nav-link" role="menuitem">About</a></li>
+          <li class="nav-item" role="none"><a href="/#about" class="nav-link" role="menuitem">About</a></li>
           <li class="nav-item" role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
         </ul>
       </nav>
@@ -172,19 +183,19 @@
       <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
     <ul class="mobile-nav-list">
-      <li><a href="index.html#hero" class="mobile-nav-link">Home</a></li>
+      <li><a href="/#hero" class="mobile-nav-link">Home</a></li>
       <li class="mobile-nav-group">
         <div class="mobile-nav-subhead">Core Box Products</div>
-        <a href="gi-core-boxes.html" class="mobile-nav-link sub-link">
+        <a href="gi-core-boxes" class="mobile-nav-link sub-link">
           <span class="sub-dot"></span> GI Core Boxes (All Models)
         </a>
-        <a href="plastic-core-boxes.html" class="mobile-nav-link sub-link active">
+        <a href="plastic-core-boxes" class="mobile-nav-link sub-link active">
           <span class="sub-dot"></span> Plastic Core Trays (Polymer)
         </a>
       </li>
-      <li><a href="index.html#calculator" class="mobile-nav-link">Core Box Calculator</a></li>
-      <li><a href="index.html#visuals" class="mobile-nav-link">On-Site Visuals</a></li>
-      <li><a href="index.html#about" class="mobile-nav-link">About Company</a></li>
+      <li><a href="/#calculator" class="mobile-nav-link">Core Box Calculator</a></li>
+      <li><a href="/#visuals" class="mobile-nav-link">On-Site Visuals</a></li>
+      <li><a href="/#about" class="mobile-nav-link">About Company</a></li>
       <li><a href="#contact" class="mobile-nav-link">Contact &amp; Enquiry</a></li>
     </ul>
     <div class="drawer-footer">
@@ -204,9 +215,9 @@
   <section class="page-hero-section">
     <div class="container">
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         <span class="breadcrumb-sep">&rsaquo;</span>
-        <a href="index.html#products">Products</a>
+        <a href="gi-core-boxes">Products</a>
         <span class="breadcrumb-sep">&rsaquo;</span>
         <span>Plastic Core Trays</span>
       </nav>
@@ -731,7 +742,7 @@
   <footer class="main-footer">
     <div class="container footer-top-grid">
       <div class="footer-col brand-col">
-        <a href="index.html#hero" class="footer-logo-card" aria-label="Global Enterprises Home">
+        <a href="/#hero" class="footer-logo-card" aria-label="Global Enterprises Home">
           <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="footer-logo-img">
         </a>
         <p class="footer-about">
@@ -766,23 +777,23 @@
       <div class="footer-col">
         <h4 class="footer-col-title">Core Products</h4>
         <ul class="footer-nav">
-          <li><a href="plastic-core-boxes.html#plastic-bq">Polymer Core Box BQ</a></li>
-          <li><a href="plastic-core-boxes.html#plastic-nq">Polymer Core Box NQ</a></li>
-          <li><a href="plastic-core-boxes.html#plastic-hq">Polymer Core Box HQ</a></li>
-          <li><a href="plastic-core-boxes.html#plastic-pq">Polymer Core Box PQ</a></li>
-          <li><a href="gi-core-boxes.html">Galvanized Steel Core Boxes</a></li>
-          <li><a href="index.html#accessories">Galvanized Plain (GP) Coils</a></li>
+          <li><a href="#plastic-bq">Polymer Core Box BQ</a></li>
+          <li><a href="#plastic-nq">Polymer Core Box NQ</a></li>
+          <li><a href="#plastic-hq">Polymer Core Box HQ</a></li>
+          <li><a href="#plastic-pq">Polymer Core Box PQ</a></li>
+          <li><a href="gi-core-boxes">Galvanized Steel Core Boxes</a></li>
+          <li><a href="/#contact">Galvanized Plain (GP) Coils</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="footer-col-title">Quick Links</h4>
         <ul class="footer-nav">
-          <li><a href="plastic-core-boxes.html">Plastic Core Trays Detail</a></li>
-          <li><a href="gi-core-boxes.html">GI Core Boxes Detail</a></li>
-          <li><a href="index.html#calculator">Tray Volume Calculator</a></li>
-          <li><a href="index.html#visuals">On-Site Visual Gallery</a></li>
-          <li><a href="index.html#about">About Company</a></li>
+          <li><a href="plastic-core-boxes">Plastic Core Trays Detail</a></li>
+          <li><a href="gi-core-boxes">GI Core Boxes Detail</a></li>
+          <li><a href="/#calculator">Tray Volume Calculator</a></li>
+          <li><a href="/#visuals">On-Site Visual Gallery</a></li>
+          <li><a href="/#about">About Company</a></li>
         </ul>
       </div>
 
