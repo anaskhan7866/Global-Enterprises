@@ -21,17 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sticky header background transition
   const handleScroll = () => {
     const scrollY = window.scrollY || window.pageYOffset;
-    if (scrollY > 50) {
-      mainHeader.classList.add('scrolled');
-    } else {
-      mainHeader.classList.remove('scrolled');
+    if (mainHeader) {
+      if (scrollY > 50) {
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
     }
 
-    // Scroll to top button visibility
-    if (scrollY > 400) {
-      scrollTopBtn.classList.add('visible');
-    } else {
-      scrollTopBtn.classList.remove('visible');
+    // Scroll to top button visibility (safe check)
+    if (scrollTopBtn) {
+      if (scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
     }
   };
 
@@ -47,16 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mobile Drawer Toggle
   const openMobileMenu = () => {
-    mobileDrawer.classList.add('active');
-    mobileOverlay.classList.add('active');
-    mobileToggle.setAttribute('aria-expanded', 'true');
+    if (mobileDrawer) mobileDrawer.classList.add('active');
+    if (mobileOverlay) mobileOverlay.classList.add('active');
+    if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   };
 
   const closeMobileMenu = () => {
-    mobileDrawer.classList.remove('active');
-    mobileOverlay.classList.remove('active');
-    mobileToggle.setAttribute('aria-expanded', 'false');
+    if (mobileDrawer) mobileDrawer.classList.remove('active');
+    if (mobileOverlay) mobileOverlay.classList.remove('active');
+    if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   };
 
@@ -137,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let autoSlideInterval = null;
 
-    if (!slides.length) return;
+    if (!slides.length || !dotsContainer) return;
 
     // Create dots
     dotsContainer.innerHTML = '';
@@ -229,14 +233,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const applyCalcToQuoteBtn = document.getElementById('applyCalcToQuoteBtn');
 
   const updateCalculations = () => {
-    if (!drillModelSelect || !metersDrilledInput) return;
+    if (!drillModelSelect || !metersDrilledInput || !metersValueDisplay) return;
 
     const meters = parseInt(metersDrilledInput.value, 10);
     metersValueDisplay.textContent = `${meters} m`;
 
-    const selectedOption = drillModelSelect.options[drillModelSelect.selectedIndex];
+    const selectedOption = drillModelSelect.options && drillModelSelect.options[drillModelSelect.selectedIndex];
+    if (!selectedOption) return;
+
     const capacityPerTray = parseFloat(selectedOption.getAttribute('data-capacity')) || 5;
-    const isPlastic = trayMaterialSelect.value === 'plastic';
+    const isPlastic = trayMaterialSelect && trayMaterialSelect.value === 'plastic';
 
     // Unit weight
     const metalWeight = parseFloat(selectedOption.getAttribute('data-weight')) || 5.5;
@@ -247,9 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const traysNeeded = Math.ceil(meters / capacityPerTray);
     const totalTareWeight = (traysNeeded * unitWeight).toFixed(1);
 
-    calcTraysCount.textContent = traysNeeded.toLocaleString('en-IN');
-    calcTotalWeight.textContent = `${parseFloat(totalTareWeight).toLocaleString('en-IN')} kg`;
-    calcLidsCount.textContent = traysNeeded.toLocaleString('en-IN');
+    if (calcTraysCount) calcTraysCount.textContent = traysNeeded.toLocaleString('en-IN');
+    if (calcTotalWeight) calcTotalWeight.textContent = `${parseFloat(totalTareWeight).toLocaleString('en-IN')} kg`;
+    if (calcLidsCount) calcLidsCount.textContent = traysNeeded.toLocaleString('en-IN');
   };
 
   if (drillModelSelect) drillModelSelect.addEventListener('change', updateCalculations);
@@ -612,16 +618,191 @@ _Inquiry sent via globalcorebox.in_`;
     });
   }
   // -------------------------------------------------------------------------
-  // Product Card Thumbnail Switcher
+  // Product Card Image Sliders (Multi-Photo Slide System)
   // -------------------------------------------------------------------------
+  const initProductSliders = () => {
+    const sliders = document.querySelectorAll('.product-slider');
+    sliders.forEach(slider => {
+      const track = slider.querySelector('.slider-slides-track');
+      const slides = slider.querySelectorAll('.slider-slide');
+      if (!track || slides.length === 0) return;
+
+      const prevBtn = slider.querySelector('.slider-btn.prev');
+      const nextBtn = slider.querySelector('.slider-btn.next');
+      const dots = slider.querySelectorAll('.slider-dots .dot');
+      const thumbs = slider.querySelectorAll('.slider-thumbnails .thumb-btn');
+      const counterCurrent = slider.querySelector('.current-slide-num');
+      const counterTotal = slider.querySelector('.total-slides-num');
+
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      if (counterTotal) {
+        counterTotal.textContent = totalSlides;
+      }
+
+      const goToSlide = (targetIndex) => {
+        if (targetIndex < 0) {
+          currentIndex = totalSlides - 1;
+        } else if (targetIndex >= totalSlides) {
+          currentIndex = 0;
+        } else {
+          currentIndex = targetIndex;
+        }
+
+        // Slide the track
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update active class on slides
+        slides.forEach((slide, idx) => {
+          if (idx === currentIndex) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+
+        // Update active class on dots
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+
+        // Update active class on thumbnail buttons
+        thumbs.forEach((thumb, idx) => {
+          if (idx === currentIndex) {
+            thumb.classList.add('active');
+          } else {
+            thumb.classList.remove('active');
+          }
+        });
+
+        // Update counter number
+        if (counterCurrent) {
+          counterCurrent.textContent = currentIndex + 1;
+        }
+      };
+
+      // Event delegation on slider container for maximum click reliability
+      slider.addEventListener('click', (e) => {
+        const prev = e.target.closest('.slider-btn.prev');
+        if (prev) {
+          e.preventDefault();
+          e.stopPropagation();
+          goToSlide(currentIndex - 1);
+          return;
+        }
+
+        const next = e.target.closest('.slider-btn.next');
+        if (next) {
+          e.preventDefault();
+          e.stopPropagation();
+          goToSlide(currentIndex + 1);
+          return;
+        }
+
+        const dot = e.target.closest('.slider-dots .dot');
+        if (dot) {
+          e.preventDefault();
+          e.stopPropagation();
+          const dotIdx = Array.from(dots).indexOf(dot);
+          if (dotIdx !== -1) goToSlide(dotIdx);
+          return;
+        }
+
+        const thumb = e.target.closest('.slider-thumbnails .thumb-btn');
+        if (thumb) {
+          e.preventDefault();
+          e.stopPropagation();
+          const thumbIdx = Array.from(thumbs).indexOf(thumb);
+          if (thumbIdx !== -1) goToSlide(thumbIdx);
+          return;
+        }
+      });
+
+      // Direct button listeners as secondary assurance
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          goToSlide(currentIndex - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          goToSlide(currentIndex + 1);
+        });
+      }
+
+      // Dot listeners
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          goToSlide(idx);
+        });
+      });
+
+      // Thumbnail listeners
+      thumbs.forEach((thumb, idx) => {
+        thumb.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          goToSlide(idx);
+        });
+      });
+
+      // Touch / Swipe support for mobile & tablet
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isSwiping = false;
+
+      slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isSwiping = true;
+      }, { passive: true });
+
+      slider.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        isSwiping = false;
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+
+        // Ensure horizontal swipe is dominant and exceeds threshold
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            goToSlide(currentIndex + 1); // Swipe left -> next
+          } else {
+            goToSlide(currentIndex - 1); // Swipe right -> prev
+          }
+        }
+      }, { passive: true });
+
+      // Initialize initial state
+      goToSlide(0);
+    });
+  };
+
+  initProductSliders();
+
+  // Legacy fallback for any simple thumb items
   document.querySelectorAll('.product-item-card').forEach(card => {
     const mainImg = card.querySelector('.main-display-img');
-    const thumbs = card.querySelectorAll('.thumb-item');
-    if (!mainImg || thumbs.length === 0) return;
+    const legacyThumbs = card.querySelectorAll('.thumbnail-strip .thumb-item');
+    if (!mainImg || legacyThumbs.length === 0) return;
 
-    thumbs.forEach(thumb => {
+    legacyThumbs.forEach(thumb => {
       thumb.addEventListener('click', () => {
-        thumbs.forEach(t => t.classList.remove('active'));
+        legacyThumbs.forEach(t => t.classList.remove('active'));
         thumb.classList.add('active');
         mainImg.src = thumb.src;
         mainImg.alt = thumb.alt;

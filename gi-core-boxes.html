@@ -18,8 +18,7 @@
     content="assets/images/Galvanized-Steel-Core-Trays-for-Durability-Safety-Easy-Handling-1.webp">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png"
-    href="assets/images/cropped-cropped-12-152x76.png">
+  <link rel="icon" type="image/png" href="assets/images/cropped-cropped-12-152x76.png">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,8 +71,7 @@
   <header class="main-header" id="mainHeader">
     <div class="container header-container">
       <a href="index.html#hero" class="brand-logo" aria-label="Global Enterprises Home">
-        <img src="assets/images/cropped-cropped-12-300x151.png"
-          alt="Global Enterprises Logo" class="brand-logo-img">
+        <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="brand-logo-img">
         <span class="sr-only">Global Enterprises</span>
       </a>
 
@@ -96,8 +94,7 @@
                 <!-- GI Core Box Item -->
                 <a href="gi-core-boxes.html" class="dropdown-product-card" role="menuitem">
                   <div class="dp-card-img">
-                    <img src="assets/images/Product3-removebg.png"
-                      alt="GI Core Box">
+                    <img src="assets/images/Product3-removebg.png" alt="GI Core Box">
                   </div>
                   <div class="dp-card-content">
                     <span class="dp-tag">Galvanized Steel</span>
@@ -133,15 +130,15 @@
               </div>
             </div>
           </li>
-          <li class="nav-item" role="none"><a href="index.html#specifications" class="nav-link"
-              role="menuitem">Specs</a></li>
+
           <li class="nav-item" role="none">
             <a href="index.html#calculator" class="nav-link" role="menuitem">
               <span>Calculator</span>
               <span class="nav-pill-badge">Tool</span>
             </a>
           </li>
-          <li class="nav-item" role="none"><a href="index.html#visuals" class="nav-link" role="menuitem">Visuals</a></li>
+          <li class="nav-item" role="none"><a href="index.html#visuals" class="nav-link" role="menuitem">Visuals</a>
+          </li>
           <li class="nav-item" role="none"><a href="index.html#about" class="nav-link" role="menuitem">About</a></li>
           <li class="nav-item" role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
         </ul>
@@ -170,8 +167,7 @@
   <div class="mobile-drawer" id="mobileDrawer">
     <div class="drawer-header">
       <div class="drawer-brand">
-        <img src="assets/images/cropped-cropped-12-300x151.png"
-          alt="Global Enterprises Logo" class="drawer-logo-img">
+        <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="drawer-logo-img">
       </div>
       <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
@@ -258,19 +254,69 @@
       <!-- Model 1: BQ 7-Row & 6-Row -->
       <div class="product-item-card" id="model-bq">
         <div class="product-visual-pane">
-          <div class="main-visual-wrap">
-            <img src="assets/images/Product3-removebg.png"
-              alt="Galvanized Core Box Model BQ" class="main-display-img lightbox-trigger">
-          </div>
-          <div class="thumbnail-strip">
-            <img src="assets/images/Product3-removebg.png" alt="BQ View 1"
-              class="thumb-item active">
-            <img src="assets/images/core-box-22-gauge.jpeg" alt="BQ View 2"
-              class="thumb-item">
-            <img src="assets/images/core-box-2.jpg" alt="BQ View 3"
-              class="thumb-item">
-            <img src="assets/images/coretray.webp" alt="BQ View 4"
-              class="thumb-item">
+          <div class="product-slider">
+            <div class="slider-viewport">
+              <div class="slider-slides-track">
+                <div class="slider-slide active">
+                  <img src="assets/images/Product3-removebg.png" alt="Galvanized Core Box Model BQ - Angle 1"
+                    class="lightbox-trigger" data-title="Model BQ - Front Angle View">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/core-box-22-gauge.jpeg" alt="Galvanized Core Box Model BQ - View 2"
+                    class="lightbox-trigger" data-title="Model BQ - 22 Gauge Pressed Form">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/core-box-2.jpg" alt="Galvanized Core Box Model BQ - View 3"
+                    class="lightbox-trigger" data-title="Model BQ - Deep Storage Profile & Drain Apertures">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/coretray.webp" alt="Galvanized Core Box Model BQ - View 4"
+                    class="lightbox-trigger" data-title="Model BQ - Corrugated Lattice Structure">
+                </div>
+              </div>
+
+              <!-- Counter Badge -->
+              <div class="slider-counter"><span class="current-slide-num">1</span> / <span
+                  class="total-slides-num">4</span></div>
+
+              <!-- Arrow Navigation Buttons -->
+              <button type="button" class="slider-btn prev" aria-label="Previous photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="slider-btn next" aria-label="Next photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Slide Pagination Dots -->
+              <div class="slider-dots">
+                <button type="button" class="dot active" aria-label="Photo 1"></button>
+                <button type="button" class="dot" aria-label="Photo 2"></button>
+                <button type="button" class="dot" aria-label="Photo 3"></button>
+                <button type="button" class="dot" aria-label="Photo 4"></button>
+              </div>
+            </div>
+
+            <!-- Slide Thumbnail Jump Strip -->
+            <div class="slider-thumbnails">
+              <button type="button" class="thumb-btn active" aria-label="View photo 1">
+                <img src="assets/images/Product3-removebg.png" alt="BQ Angle 1">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 2">
+                <img src="assets/images/core-box-22-gauge.jpeg" alt="BQ Angle 2">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 3">
+                <img src="assets/images/core-box-2.jpg" alt="BQ Angle 3">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 4">
+                <img src="assets/images/coretray.webp" alt="BQ Angle 4">
+              </button>
+            </div>
           </div>
         </div>
 
@@ -284,13 +330,20 @@
           </p>
 
           <div class="product-spec-table">
-            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">36.5 mm (BQ)</span></div>
-            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">7 Rows &times; 1 Meter (7m total) or 6 Rows (6m)</span></div>
-            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">42 mm per slot</span></div>
-            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L) &times; 305 mm (W) &times; 50 mm (H)</span></div>
-            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">22 Gauge (0.8 mm) / 20 Gauge (1.0 mm)</span></div>
-            <div class="spec-row"><span class="spec-name">Zinc Coating</span><span class="spec-val">GP Zero Spangle / Regular Spangle (120-275 GSM)</span></div>
-            <div class="spec-row"><span class="spec-name">Stacking Security</span><span class="spec-val">Nesting folded end-brackets for secure pallet stacking</span></div>
+            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">36.5 mm (BQ)</span>
+            </div>
+            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">7 Rows &times; 1
+                Meter (7m total) or 6 Rows (6m)</span></div>
+            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">42 mm per
+                slot</span></div>
+            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L)
+                &times; 305 mm (W) &times; 50 mm (H)</span></div>
+            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">22 Gauge (0.8 mm) /
+                20 Gauge (1.0 mm)</span></div>
+            <div class="spec-row"><span class="spec-name">Zinc Coating</span><span class="spec-val">GP Zero Spangle /
+                Regular Spangle (120-275 GSM)</span></div>
+            <div class="spec-row"><span class="spec-name">Stacking Security</span><span class="spec-val">Nesting folded
+                end-brackets for secure pallet stacking</span></div>
           </div>
 
           <div class="product-action-row mt-3">
@@ -306,19 +359,70 @@
       <!-- Model 2: NQ 5-Row (Standard Geological) -->
       <div class="product-item-card reverse" id="model-nq" style="margin-top: 3.5rem;">
         <div class="product-visual-pane">
-          <div class="main-visual-wrap">
-            <img src="assets/images/Galvanized-Steel-Metal-Drilling-Core-Box.jpg"
-              alt="Galvanized Core Box Model NQ" class="main-display-img lightbox-trigger">
-          </div>
-          <div class="thumbnail-strip">
-            <img src="assets/images/Galvanized-Steel-Metal-Drilling-Core-Box.jpg" alt="NQ View 1"
-              class="thumb-item active">
-            <img src="assets/images/corebox2.webp" alt="NQ View 2"
-              class="thumb-item">
-            <img src="assets/images/IMG_6313.jpg" alt="NQ View 3"
-              class="thumb-item">
-            <img src="assets/images/IMG_8720.jpg" alt="NQ View 4"
-              class="thumb-item">
+          <div class="product-slider">
+            <div class="slider-viewport">
+              <div class="slider-slides-track">
+                <div class="slider-slide active">
+                  <img src="assets/images/Galvanized-Steel-Metal-Drilling-Core-Box.jpg"
+                    alt="Galvanized Core Box Model NQ - Exploration Standard" class="lightbox-trigger"
+                    data-title="Model NQ - 5-Row Exploration Standard">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/corebox2.webp" alt="Galvanized Core Box Model NQ - View 2"
+                    class="lightbox-trigger" data-title="Model NQ - 5-Row Channel Alignment">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/IMG_6313.jpg" alt="Galvanized Core Box Model NQ - View 3"
+                    class="lightbox-trigger" data-title="Model NQ - Prime Galvanized Steel Stamping">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/IMG_8720.jpg" alt="Galvanized Core Box Model NQ - View 4"
+                    class="lightbox-trigger" data-title="Model NQ - Rock Core Logging Inspection">
+                </div>
+              </div>
+
+              <!-- Counter Badge -->
+              <div class="slider-counter"><span class="current-slide-num">1</span> / <span
+                  class="total-slides-num">4</span></div>
+
+              <!-- Arrow Navigation Buttons -->
+              <button type="button" class="slider-btn prev" aria-label="Previous photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="slider-btn next" aria-label="Next photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Slide Pagination Dots -->
+              <div class="slider-dots">
+                <button type="button" class="dot active" aria-label="Photo 1"></button>
+                <button type="button" class="dot" aria-label="Photo 2"></button>
+                <button type="button" class="dot" aria-label="Photo 3"></button>
+                <button type="button" class="dot" aria-label="Photo 4"></button>
+              </div>
+            </div>
+
+            <!-- Slide Thumbnail Jump Strip -->
+            <div class="slider-thumbnails">
+              <button type="button" class="thumb-btn active" aria-label="View photo 1">
+                <img src="assets/images/Galvanized-Steel-Metal-Drilling-Core-Box.jpg" alt="NQ View 1">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 2">
+                <img src="assets/images/corebox2.webp" alt="NQ View 2">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 3">
+                <img src="assets/images/IMG_6313.jpg" alt="NQ View 3">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 4">
+                <img src="assets/images/IMG_8720.jpg" alt="NQ View 4">
+              </button>
+            </div>
           </div>
         </div>
 
@@ -332,13 +436,20 @@
           </p>
 
           <div class="product-spec-table">
-            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">47.6 mm (NQ)</span></div>
-            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">5 Rows &times; 1 Meter (5m total)</span></div>
-            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">55 mm per slot</span></div>
-            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L) &times; 305 mm (W) &times; 60 mm (H)</span></div>
-            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">22 Gauge (0.8 mm) / 20 Gauge (1.0 mm)</span></div>
-            <div class="spec-row"><span class="spec-name">Zinc Coating</span><span class="spec-val">Hot Dip Galvanized (IS 277 standard)</span></div>
-            <div class="spec-row"><span class="spec-name">Drainage</span><span class="spec-val">Laser slotted bottom drain apertures</span></div>
+            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">47.6 mm (NQ)</span>
+            </div>
+            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">5 Rows &times; 1
+                Meter (5m total)</span></div>
+            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">55 mm per
+                slot</span></div>
+            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L)
+                &times; 305 mm (W) &times; 60 mm (H)</span></div>
+            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">22 Gauge (0.8 mm) /
+                20 Gauge (1.0 mm)</span></div>
+            <div class="spec-row"><span class="spec-name">Zinc Coating</span><span class="spec-val">Hot Dip Galvanized
+                (IS 277 standard)</span></div>
+            <div class="spec-row"><span class="spec-name">Drainage</span><span class="spec-val">Laser slotted bottom
+                drain apertures</span></div>
           </div>
 
           <div class="product-action-row mt-3">
@@ -354,17 +465,72 @@
       <!-- Model 3: HQ 4-Row (Geotechnical & Heavy Mineral) -->
       <div class="product-item-card" id="model-hq" style="margin-top: 3.5rem;">
         <div class="product-visual-pane">
-          <div class="main-visual-wrap">
-            <img src="assets/images/Galvanised-Steel-Core-Boxes.webp"
-              alt="Galvanized Core Box Model HQ" class="main-display-img lightbox-trigger">
-          </div>
-          <div class="thumbnail-strip">
-            <img src="assets/images/Galvanised-Steel-Core-Boxes.webp" alt="HQ View 1"
-              class="thumb-item active">
-            <img src="assets/images/g-box-HQ-3.jpg" alt="HQ View 2"
-              class="thumb-item">
-            <img src="assets/images/Metal-Core-Trays-for-Pq-Hq-Nq-1.webp" alt="HQ View 3"
-              class="thumb-item">
+          <div class="product-slider">
+            <div class="slider-viewport">
+              <div class="slider-slides-track">
+                <div class="slider-slide active">
+                  <img src="assets/images/Galvanised-Steel-Core-Boxes.webp"
+                    alt="Galvanized Core Box Model HQ - Geotechnical Profile" class="lightbox-trigger"
+                    data-title="Model HQ - Geotechnical 4-Row Tray">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/g-box-HQ-3.jpg" alt="Galvanized Core Box Model HQ - View 2"
+                    class="lightbox-trigger" data-title="Model HQ - Heavy Channel Profile">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/Metal-Core-Trays-for-Pq-Hq-Nq-1.webp"
+                    alt="Galvanized Core Box Model HQ - View 3" class="lightbox-trigger"
+                    data-title="Model HQ - Stiffened Endplate Detail">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/Galvanized-Sheet-Iron-Core-Tray-1-1.webp"
+                    alt="Galvanized Core Box Model HQ - View 4" class="lightbox-trigger"
+                    data-title="Model HQ - Zinc Coating & Precision Bends">
+                </div>
+              </div>
+
+              <!-- Counter Badge -->
+              <div class="slider-counter"><span class="current-slide-num">1</span> / <span
+                  class="total-slides-num">4</span></div>
+
+              <!-- Arrow Navigation Buttons -->
+              <button type="button" class="slider-btn prev" aria-label="Previous photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="slider-btn next" aria-label="Next photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Slide Pagination Dots -->
+              <div class="slider-dots">
+                <button type="button" class="dot active" aria-label="Photo 1"></button>
+                <button type="button" class="dot" aria-label="Photo 2"></button>
+                <button type="button" class="dot" aria-label="Photo 3"></button>
+                <button type="button" class="dot" aria-label="Photo 4"></button>
+              </div>
+            </div>
+
+            <!-- Slide Thumbnail Jump Strip -->
+            <div class="slider-thumbnails">
+              <button type="button" class="thumb-btn active" aria-label="View photo 1">
+                <img src="assets/images/Galvanised-Steel-Core-Boxes.webp" alt="HQ View 1">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 2">
+                <img src="assets/images/g-box-HQ-3.jpg" alt="HQ View 2">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 3">
+                <img src="assets/images/Metal-Core-Trays-for-Pq-Hq-Nq-1.webp" alt="HQ View 3">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 4">
+                <img src="assets/images/Galvanized-Sheet-Iron-Core-Tray-1-1.webp" alt="HQ View 4">
+              </button>
+            </div>
           </div>
         </div>
 
@@ -378,13 +544,20 @@
           </p>
 
           <div class="product-spec-table">
-            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">63.5 mm (HQ)</span></div>
-            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">4 Rows &times; 1 Meter (4m total)</span></div>
-            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">70 mm per slot</span></div>
-            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L) &times; 305 mm (W) &times; 75 mm (H)</span></div>
-            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">20 Gauge (1.0 mm) / 22 Gauge (0.8 mm)</span></div>
-            <div class="spec-row"><span class="spec-name">End Plate Stiffener</span><span class="spec-val">Triple hemmed heavy ends with ergonomic grip points</span></div>
-            <div class="spec-row"><span class="spec-name">Weather Testing</span><span class="spec-val">Tested against acidic soil and high humidity storage</span></div>
+            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">63.5 mm (HQ)</span>
+            </div>
+            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">4 Rows &times; 1
+                Meter (4m total)</span></div>
+            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">70 mm per
+                slot</span></div>
+            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L)
+                &times; 305 mm (W) &times; 75 mm (H)</span></div>
+            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">20 Gauge (1.0 mm) /
+                22 Gauge (0.8 mm)</span></div>
+            <div class="spec-row"><span class="spec-name">End Plate Stiffener</span><span class="spec-val">Triple hemmed
+                heavy ends with ergonomic grip points</span></div>
+            <div class="spec-row"><span class="spec-name">Weather Testing</span><span class="spec-val">Tested against
+                acidic soil and high humidity storage</span></div>
           </div>
 
           <div class="product-action-row mt-3">
@@ -400,19 +573,72 @@
       <!-- Model 4: PQ 3-Row (Large Core Drilling) -->
       <div class="product-item-card reverse" id="model-pq" style="margin-top: 3.5rem;">
         <div class="product-visual-pane">
-          <div class="main-visual-wrap">
-            <img src="assets/images/Galvanized-Steel-Core-Trays-for-Durability-Safety-Easy-Handling-1.webp"
-              alt="Galvanized Core Box Model PQ" class="main-display-img lightbox-trigger">
-          </div>
-          <div class="thumbnail-strip">
-            <img src="assets/images/Galvanized-Steel-Core-Trays-for-Durability-Safety-Easy-Handling-1.webp" alt="PQ View 1"
-              class="thumb-item active">
-            <img src="assets/images/Critical-Metals-Core-Trays.jpg" alt="PQ View 2"
-              class="thumb-item">
-            <img src="assets/images/Galvanized-Sheet-Iron-Core-Tray.webp" alt="PQ View 3"
-              class="thumb-item">
-            <img src="assets/images/Picture1.png" alt="PQ View 4"
-              class="thumb-item">
+          <div class="product-slider">
+            <div class="slider-viewport">
+              <div class="slider-slides-track">
+                <div class="slider-slide active">
+                  <img src="assets/images/Galvanized-Steel-Core-Trays-for-Durability-Safety-Easy-Handling-1.webp"
+                    alt="Galvanized Core Box Model PQ - 3-Row Extra Heavy" class="lightbox-trigger"
+                    data-title="Model PQ - Extra Heavy 3-Row Large Core Tray">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/Critical-Metals-Core-Trays.jpg" alt="Galvanized Core Box Model PQ - View 2"
+                    class="lightbox-trigger" data-title="Model PQ - Bulk Mineral Exploration Tray">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/Galvanized-Sheet-Iron-Core-Tray.webp"
+                    alt="Galvanized Core Box Model PQ - View 3" class="lightbox-trigger"
+                    data-title="Model PQ - 92 mm Slot Profile">
+                </div>
+                <div class="slider-slide">
+                  <img src="assets/images/Picture1.png" alt="Galvanized Core Box Model PQ - View 4"
+                    class="lightbox-trigger" data-title="Model PQ - Field Rig Site Deployment">
+                </div>
+              </div>
+
+              <!-- Counter Badge -->
+              <div class="slider-counter"><span class="current-slide-num">1</span> / <span
+                  class="total-slides-num">4</span></div>
+
+              <!-- Arrow Navigation Buttons -->
+              <button type="button" class="slider-btn prev" aria-label="Previous photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="slider-btn next" aria-label="Next photo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Slide Pagination Dots -->
+              <div class="slider-dots">
+                <button type="button" class="dot active" aria-label="Photo 1"></button>
+                <button type="button" class="dot" aria-label="Photo 2"></button>
+                <button type="button" class="dot" aria-label="Photo 3"></button>
+                <button type="button" class="dot" aria-label="Photo 4"></button>
+              </div>
+            </div>
+
+            <!-- Slide Thumbnail Jump Strip -->
+            <div class="slider-thumbnails">
+              <button type="button" class="thumb-btn active" aria-label="View photo 1">
+                <img src="assets/images/Galvanized-Steel-Core-Trays-for-Durability-Safety-Easy-Handling-1.webp"
+                  alt="PQ View 1">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 2">
+                <img src="assets/images/Critical-Metals-Core-Trays.jpg" alt="PQ View 2">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 3">
+                <img src="assets/images/Galvanized-Sheet-Iron-Core-Tray.webp" alt="PQ View 3">
+              </button>
+              <button type="button" class="thumb-btn" aria-label="View photo 4">
+                <img src="assets/images/Picture1.png" alt="PQ View 4">
+              </button>
+            </div>
           </div>
         </div>
 
@@ -426,13 +652,20 @@
           </p>
 
           <div class="product-spec-table">
-            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">85 mm to 90 mm (PQ)</span></div>
-            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">3 Rows &times; 1 Meter (3m total)</span></div>
-            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">92 mm per slot</span></div>
-            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L) &times; 305 mm (W) &times; 95 mm (H)</span></div>
-            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">18 Gauge (1.2 mm) / 20 Gauge (1.0 mm)</span></div>
-            <div class="spec-row"><span class="spec-name">Load Capacity</span><span class="spec-val">Up to 65+ kg core load without deflection</span></div>
-            <div class="spec-row"><span class="spec-name">Corrugation Type</span><span class="spec-val">V-base with rounded crown for core centralization</span></div>
+            <div class="spec-row"><span class="spec-name">Core Diameter</span><span class="spec-val">85 mm to 90 mm
+                (PQ)</span></div>
+            <div class="spec-row"><span class="spec-name">Channel Capacity</span><span class="spec-val">3 Rows &times; 1
+                Meter (3m total)</span></div>
+            <div class="spec-row"><span class="spec-name">Trough Width</span><span class="spec-val">92 mm per
+                slot</span></div>
+            <div class="spec-row"><span class="spec-name">Overall Dimensions</span><span class="spec-val">1010 mm (L)
+                &times; 305 mm (W) &times; 95 mm (H)</span></div>
+            <div class="spec-row"><span class="spec-name">Sheet Gauge</span><span class="spec-val">18 Gauge (1.2 mm) /
+                20 Gauge (1.0 mm)</span></div>
+            <div class="spec-row"><span class="spec-name">Load Capacity</span><span class="spec-val">Up to 65+ kg core
+                load without deflection</span></div>
+            <div class="spec-row"><span class="spec-name">Corrugation Type</span><span class="spec-val">V-base with
+                rounded crown for core centralization</span></div>
           </div>
 
           <div class="product-action-row mt-3">
@@ -446,11 +679,14 @@
       </div>
 
       <!-- Matching Accessories Strip -->
-      <div class="features-card mt-5" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.5rem;">
-        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      <div class="features-card mt-5"
+        style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.5rem;">
+        <div class="features-grid"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div>
             <div class="dp-tag mb-2">Galvanized Lids</div>
-            <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">Full-Cover Protective Lids</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">
+              Full-Cover Protective Lids</h4>
             <p style="font-size: 0.9rem; color: #64748b; line-height: 1.6;">
               Custom matching galvanized sheet lids fabricated in 22 and 24 gauge. Featuring hemmed side lips that snap
               tightly over the core tray, protecting cores from weather exposure, rain wash, and contamination.
@@ -458,17 +694,21 @@
           </div>
           <div>
             <div class="dp-tag mb-2">Labeling &amp; Markers</div>
-            <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">Core Depth Markers &amp; Blocks</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">
+              Core Depth Markers &amp; Blocks</h4>
             <p style="font-size: 0.9rem; color: #64748b; line-height: 1.6;">
-              Precision plastic and wooden core recovery depth markers with flat writable faces for borehole numbers, from-to
+              Precision plastic and wooden core recovery depth markers with flat writable faces for borehole numbers,
+              from-to
               depths, core loss indications, and geological logging tags.
             </p>
           </div>
           <div>
             <div class="dp-tag mb-2">Transport Security</div>
-            <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">Pallet Nesting Stacking</h4>
+            <h4 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.75rem;">
+              Pallet Nesting Stacking</h4>
             <p style="font-size: 0.9rem; color: #64748b; line-height: 1.6;">
-              Each GI tray is formed with precision end-profile return flanges that interlock with the box beneath, ensuring
+              Each GI tray is formed with precision end-profile return flanges that interlock with the box beneath,
+              ensuring
               safe stacking up to 25 layers high on standard mining pallets.
             </p>
           </div>
@@ -486,11 +726,13 @@
         <h2 class="section-title">GI CORE BOX SPECIFICATION MATRIX</h2>
         <div class="section-bar"></div>
         <p class="section-desc">
-          Compare dimensional engineering, sheet gauges, channel partitions, and weight across our complete galvanized steel range.
+          Compare dimensional engineering, sheet gauges, channel partitions, and weight across our complete galvanized
+          steel range.
         </p>
       </div>
 
-      <div class="spec-table-card" style="background: #ffffff; border-radius: 16px; overflow-x: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
+      <div class="spec-table-card"
+        style="background: #ffffff; border-radius: 16px; overflow-x: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
         <table class="styled-table" style="width: 100%; border-collapse: collapse; text-align: left;">
           <thead>
             <tr style="background-color: #0f172a; color: #ffffff;">
@@ -513,7 +755,8 @@
               <td style="padding: 1.1rem 1rem;">7.0 / 6.0 Meters</td>
               <td style="padding: 1.1rem 1rem;">1010 &times; 305 &times; 50 mm</td>
               <td style="padding: 1.1rem 1rem;">22G / 20G</td>
-              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-outline" style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
+              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-outline"
+                  style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
             </tr>
             <tr style="background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
               <td style="padding: 1.1rem 1rem; font-weight: 700; color: #0f172a;">GI Model NQ (Standard)</td>
@@ -523,7 +766,8 @@
               <td style="padding: 1.1rem 1rem;">5.0 Meters</td>
               <td style="padding: 1.1rem 1rem;">1010 &times; 305 &times; 60 mm</td>
               <td style="padding: 1.1rem 1rem;">22G / 20G</td>
-              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
+              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-primary"
+                  style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
             </tr>
             <tr style="border-bottom: 1px solid #f1f5f9;">
               <td style="padding: 1.1rem 1rem; font-weight: 700; color: #0f172a;">GI Model HQ</td>
@@ -533,7 +777,8 @@
               <td style="padding: 1.1rem 1rem;">4.0 Meters</td>
               <td style="padding: 1.1rem 1rem;">1010 &times; 305 &times; 75 mm</td>
               <td style="padding: 1.1rem 1rem;">20G / 22G</td>
-              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-outline" style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
+              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-outline"
+                  style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
             </tr>
             <tr>
               <td style="padding: 1.1rem 1rem; font-weight: 700; color: #0f172a;">GI Model PQ</td>
@@ -543,7 +788,8 @@
               <td style="padding: 1.1rem 1rem;">3.0 Meters</td>
               <td style="padding: 1.1rem 1rem;">1010 &times; 305 &times; 95 mm</td>
               <td style="padding: 1.1rem 1rem;">18G / 20G</td>
-              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-outline" style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
+              <td style="padding: 1.1rem 1rem;"><a href="#contact" class="btn btn-outline"
+                  style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">Get RFQ</a></td>
             </tr>
           </tbody>
         </table>
@@ -693,8 +939,7 @@
     <div class="container footer-top-grid">
       <div class="footer-col brand-col">
         <a href="index.html#hero" class="footer-logo-card" aria-label="Global Enterprises Home">
-          <img src="assets/images/cropped-cropped-12-300x151.png"
-            alt="Global Enterprises Logo" class="footer-logo-img">
+          <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="footer-logo-img">
         </a>
         <p class="footer-about">
           Global Enterprises is a trusted pioneer in exploration drilling products, galvanized core storage trays, and
@@ -742,7 +987,6 @@
         <ul class="footer-nav">
           <li><a href="gi-core-boxes.html">GI Core Boxes Detail</a></li>
           <li><a href="plastic-core-boxes.html">Plastic Core Trays Detail</a></li>
-          <li><a href="index.html#specifications">Technical Specs</a></li>
           <li><a href="index.html#calculator">Tray Volume Calculator</a></li>
           <li><a href="index.html#visuals">On-Site Visual Gallery</a></li>
           <li><a href="index.html#about">About Company</a></li>
