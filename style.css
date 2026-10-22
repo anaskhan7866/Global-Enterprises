@@ -2557,36 +2557,65 @@ select.form-control option {
 }
 
 /* WhatsApp Submit Button Styling */
-.whatsapp-submit-btn {
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+#submitBtn,
+.whatsapp-submit-btn,
+button.whatsapp-submit-btn {
+  background-color: #25d366 !important;
+  background: #25d366 !important;
+  background-image: linear-gradient(135deg, #25d366 0%, #128c7e 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.35) !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  padding: 1.1rem 2rem !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
 }
 
-.whatsapp-submit-btn:hover {
-  background: linear-gradient(135deg, #20ba5a 0%, #0d7065 100%) !important;
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5) !important;
-  transform: translateY(-2px);
+#submitBtn:hover,
+.whatsapp-submit-btn:hover,
+button.whatsapp-submit-btn:hover {
+  background-color: #20ba5a !important;
+  background: #20ba5a !important;
+  background-image: linear-gradient(135deg, #20ba5a 0%, #0d7065 100%) !important;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.6) !important;
+  transform: translateY(-2px) !important;
   color: #ffffff !important;
 }
 
-.btn-wa-icon {
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
+#submitBtn .btn-text,
+.whatsapp-submit-btn .btn-text {
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.02em !important;
+  display: inline-block !important;
 }
 
+#submitBtn .btn-wa-icon,
+.whatsapp-submit-btn .btn-wa-icon {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  transition: transform 0.2s ease !important;
+}
+
+#submitBtn:hover .btn-wa-icon,
 .whatsapp-submit-btn:hover .btn-wa-icon {
-  transform: scale(1.1);
+  transform: scale(1.1) !important;
 }
 
+#submitBtn.loading .btn-wa-icon,
 .whatsapp-submit-btn.loading .btn-wa-icon {
-  display: none;
+  display: none !important;
 }
 
 /* Alerts */
