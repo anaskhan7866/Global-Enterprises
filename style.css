@@ -751,24 +751,25 @@ button {
 }
 
 .dp-card-img {
-  height: 120px;
+  height: 124px;
   width: 100%;
-  background: #ffffff;
+  background: #f1f5f9;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   margin-bottom: 0.85rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0;
 }
 
 .dp-card-img img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropdown-product-card:hover .dp-card-img img {
