@@ -3305,6 +3305,18 @@ button.whatsapp-submit-btn:hover {
   width: 100%;
 }
 
+.slider-thumbnails:has(> :nth-child(2):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.slider-thumbnails:has(> :nth-child(3):last-child) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.slider-thumbnails:has(> :nth-child(4):last-child) {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .thumb-btn {
   height: 72px;
   background: #f8fafc;
