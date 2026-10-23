@@ -100,128 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(sec => sectionObserver.observe(sec));
 
   // -------------------------------------------------------------------------
-  // 2. Product Category Tabs Switcher
-  // -------------------------------------------------------------------------
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetTabId = btn.getAttribute('data-tab');
-
-      // Update button active state
-      tabButtons.forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
-      // Update content panels
-      tabContents.forEach(content => {
-        if (content.id === targetTabId) {
-          content.classList.add('active');
-        } else {
-          content.classList.remove('active');
-        }
-      });
-    });
-  });
-
-  // -------------------------------------------------------------------------
-  // 3. Multi-Image Product Sliders
-  // -------------------------------------------------------------------------
-  const sliders = document.querySelectorAll('.custom-slider');
-
-  sliders.forEach(slider => {
-    const slides = slider.querySelectorAll('.slide');
-    const prevBtn = slider.querySelector('.slider-nav-btn.prev');
-    const nextBtn = slider.querySelector('.slider-nav-btn.next');
-    const dotsContainer = slider.querySelector('.slider-dots');
-    let currentIndex = 0;
-    let autoSlideInterval = null;
-
-    if (!slides.length || !dotsContainer) return;
-
-    // Create dots
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, idx) => {
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      if (idx === 0) dot.classList.add('active');
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToSlide(idx);
-      });
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = dotsContainer.querySelectorAll('.dot');
-
-    const goToSlide = (index) => {
-      slides[currentIndex].classList.remove('active');
-      dots[currentIndex].classList.remove('active');
-      currentIndex = (index + slides.length) % slides.length;
-      slides[currentIndex].classList.add('active');
-      dots[currentIndex].classList.add('active');
-    };
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToSlide(currentIndex - 1);
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToSlide(currentIndex + 1);
-      });
-    }
-
-    // Touch Swipe Support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-
-    const handleSwipe = () => {
-      const diff = touchEndX - touchStartX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) {
-          goToSlide(currentIndex - 1);
-        } else {
-          goToSlide(currentIndex + 1);
-        }
-      }
-    };
-
-    // Auto Advance Carousel
-    const startAutoPlay = () => {
-      autoSlideInterval = setInterval(() => {
-        goToSlide(currentIndex + 1);
-      }, 5000);
-    };
-
-    const stopAutoPlay = () => {
-      clearInterval(autoSlideInterval);
-    };
-
-    slider.addEventListener('mouseenter', stopAutoPlay);
-    slider.addEventListener('mouseleave', startAutoPlay);
-    startAutoPlay();
-  });
-
-  // -------------------------------------------------------------------------
-  // 4. Interactive Core Box Requirement Calculator
+  // 2. Interactive Core Box Requirement Calculator
   // -------------------------------------------------------------------------
   const drillModelSelect = document.getElementById('drillModelSelect');
   const trayMaterialSelect = document.getElementById('trayMaterialSelect');
@@ -335,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // -------------------------------------------------------------------------
-  // 6. Gallery Filter Chips
+  // 3. Gallery Filter Chips
   // -------------------------------------------------------------------------
   const filterChips = document.querySelectorAll('.filter-chip');
   const galleryCards = document.querySelectorAll('.gallery-card');
@@ -367,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------------------------------------------------
-  // 7. Fullscreen Lightbox Modal
+  // 4. Fullscreen Lightbox Modal
   // -------------------------------------------------------------------------
   const lightboxModal = document.getElementById('lightboxModal');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -447,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------------------------------------------------
-  // 8. Live Video Modal
+  // 5. Live Video Modal
   // -------------------------------------------------------------------------
   const videoModal = document.getElementById('videoModal');
   const videoBackdrop = document.getElementById('videoBackdrop');
@@ -489,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------------------------------------------------
-  // 9. Contact / RFQ Form - Direct WhatsApp Auto-Fill Action
+  // 6. Contact / RFQ Form - Direct WhatsApp Auto-Fill Action
   // -------------------------------------------------------------------------
   const contactForm = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -585,7 +464,7 @@ _Inquiry sent via globalcorebox.in_`;
     });
   }
   // -------------------------------------------------------------------------
-  // Product Card Image Sliders (Multi-Photo Slide System)
+  // 7. Product Card Image Sliders (Multi-Photo Slide System)
   // -------------------------------------------------------------------------
   const initProductSliders = () => {
     const sliders = document.querySelectorAll('.product-slider');
@@ -761,24 +640,8 @@ _Inquiry sent via globalcorebox.in_`;
 
   initProductSliders();
 
-  // Legacy fallback for any simple thumb items
-  document.querySelectorAll('.product-item-card').forEach(card => {
-    const mainImg = card.querySelector('.main-display-img');
-    const legacyThumbs = card.querySelectorAll('.thumbnail-strip .thumb-item');
-    if (!mainImg || legacyThumbs.length === 0) return;
-
-    legacyThumbs.forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        legacyThumbs.forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        mainImg.src = thumb.src;
-        mainImg.alt = thumb.alt;
-      });
-    });
-  });
-
   // -------------------------------------------------------------------------
-  // 11. Mobile / Touch dropdown toggle for navigation
+  // 8. Mobile / Touch dropdown toggle for navigation
   // -------------------------------------------------------------------------
   const dropdownToggle = document.querySelector('.dropdown-toggle');
   const dropdownMenu = document.querySelector('.nav-dropdown-menu');
@@ -792,7 +655,7 @@ _Inquiry sent via globalcorebox.in_`;
   }
 
   // -------------------------------------------------------------------------
-  // 12. Clean URL Routing & Slugs (gi-core-boxes & plastic-core-boxes)
+  // 9. Clean URL Routing & Slugs (gi-core-boxes, plastic-core-boxes, clientele)
   // -------------------------------------------------------------------------
   const applyCleanUrls = () => {
     try {
@@ -804,6 +667,9 @@ _Inquiry sent via globalcorebox.in_`;
         const cleanPath = p.replace(/\.html$/, '');
         window.history.replaceState(null, '', cleanPath + search + hash);
       } else if (p.endsWith('plastic-core-boxes.html')) {
+        const cleanPath = p.replace(/\.html$/, '');
+        window.history.replaceState(null, '', cleanPath + search + hash);
+      } else if (p.endsWith('clientele.html')) {
         const cleanPath = p.replace(/\.html$/, '');
         window.history.replaceState(null, '', cleanPath + search + hash);
       }
@@ -833,6 +699,9 @@ _Inquiry sent via globalcorebox.in_`;
       } else if (href === 'plastic-core-boxes' || href.startsWith('plastic-core-boxes#')) {
         e.preventDefault();
         window.location.href = href.replace(/^plastic-core-boxes/, 'plastic-core-boxes.html');
+      } else if (href === 'clientele' || href.startsWith('clientele#')) {
+        e.preventDefault();
+        window.location.href = href.replace(/^clientele/, 'clientele.html');
       }
     });
   }
