@@ -24,8 +24,8 @@ A modern, high-performance, responsive website built for **Global Enterprises** 
    - Dedicated interactive image sliders with next/previous arrows, dot indicators, touch swipe support for mobile, and automatic looping.
    - Covers Galvanized Steel BQ (7-Row and 6-Row), NQ (5-Row), HQ (4-Row), and PQ (3-Row).
 
-5. **Polymer Plastic Core Boxes & Accessories**:
-   - Tabbed navigation switcher between Galvanized Steel Boxes, Lightweight Copolymer Plastic Boxes (BQ, NQ, HQ, PQ at ₹249), and Drilling Accessories / GP Coils.
+5. **Plastic Core Boxes &amp; Accessories**:
+   - Covers Lightweight Copolymer Plastic Core Trays (BQ, NQ, HQ, PQ), Snap-on Lids, and Drilling Accessories.
 
 6. **Comprehensive Technical Comparison Matrix**:
    - Side-by-side comparison table specifying model, core diameter, dimensions (cm), inseam length, slot width, lattices, core holding capacity, and net weight with lid.
