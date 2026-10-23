@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/gi-core-boxes", "destination": "/gi-core-boxes.html" },
+    { "source": "/plastic-core-boxes", "destination": "/plastic-core-boxes.html" },
+    { "source": "/clientele", "destination": "/clientele.html" }
+  ]
+}
