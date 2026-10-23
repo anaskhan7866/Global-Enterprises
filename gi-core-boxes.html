@@ -1054,6 +1054,20 @@
     </div>
   </footer>
 
+  <!-- Lightbox Modal for Fullscreen Image Zoom -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-container">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close fullscreen preview">&times;</button>
+      <div class="lightbox-content">
+        <img src="" alt="" id="lightboxImg" class="lightbox-image">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+      </div>
+      <button class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+      <button class="lightbox-nav-btn next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 
