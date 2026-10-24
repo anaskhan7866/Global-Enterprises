@@ -3,11 +3,13 @@
   "redirects": [
     { "source": "/gi-core-boxes.html", "destination": "/gi-core-boxes", "permanent": true },
     { "source": "/plastic-core-boxes.html", "destination": "/plastic-core-boxes", "permanent": true },
+    { "source": "/trunks.html", "destination": "/trunks", "permanent": true },
     { "source": "/clientele.html", "destination": "/clientele", "permanent": true }
   ],
   "rewrites": [
     { "source": "/gi-core-boxes", "destination": "/gi-core-boxes.html" },
     { "source": "/plastic-core-boxes", "destination": "/plastic-core-boxes.html" },
+    { "source": "/trunks", "destination": "/trunks.html" },
     { "source": "/clientele", "destination": "/clientele.html" }
   ]
 }

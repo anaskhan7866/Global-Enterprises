@@ -669,6 +669,9 @@ _Inquiry sent via globalcorebox.in_`;
       } else if (p.endsWith('plastic-core-boxes.html')) {
         const cleanPath = p.replace(/\.html$/, '');
         window.history.replaceState(null, '', cleanPath + search + hash);
+      } else if (p.endsWith('trunks.html')) {
+        const cleanPath = p.replace(/\.html$/, '');
+        window.history.replaceState(null, '', cleanPath + search + hash);
       } else if (p.endsWith('clientele.html')) {
         const cleanPath = p.replace(/\.html$/, '');
         window.history.replaceState(null, '', cleanPath + search + hash);
@@ -699,6 +702,9 @@ _Inquiry sent via globalcorebox.in_`;
       } else if (href === 'plastic-core-boxes' || href.startsWith('plastic-core-boxes#')) {
         e.preventDefault();
         window.location.href = href.replace(/^plastic-core-boxes/, 'plastic-core-boxes.html');
+      } else if (href === 'trunks' || href.startsWith('trunks#')) {
+        e.preventDefault();
+        window.location.href = href.replace(/^trunks/, 'trunks.html');
       } else if (href === 'clientele' || href.startsWith('clientele#')) {
         e.preventDefault();
         window.location.href = href.replace(/^clientele/, 'clientele.html');
