@@ -1743,17 +1743,21 @@ select.form-control option {
 .product-spec-table {
   background-color: var(--bg-light-surface);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
   margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .spec-row {
   display: flex;
   justify-content: space-between;
-  padding: 0.45rem 0;
-  border-bottom: 1px dashed var(--border-light);
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(203, 213, 225, 0.8);
   font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .spec-row:last-child {
@@ -1761,13 +1765,20 @@ select.form-control option {
 }
 
 .spec-name {
-  color: var(--text-dark-muted);
-  font-weight: 500;
+  color: #64748b;
+  font-weight: 600;
+  flex: 0 0 auto;
+  min-width: 140px;
+  max-width: 45%;
 }
 
 .spec-val {
   font-weight: 600;
   color: var(--text-dark);
+  text-align: right;
+  flex: 1 1 auto;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .product-action-row {
@@ -3026,6 +3037,32 @@ button.whatsapp-submit-btn:hover {
 
   .product-item-card {
     padding: 1.5rem;
+  }
+
+  .product-spec-table {
+    padding: 0.65rem 0.95rem;
+  }
+
+  .spec-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.55rem 0;
+  }
+
+  .spec-name {
+    min-width: 100%;
+    max-width: 100%;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #64748b;
+  }
+
+  .spec-val {
+    text-align: left;
+    width: 100%;
+    font-size: 0.875rem;
   }
 
   .lightbox-close {
