@@ -693,8 +693,8 @@ button {
   top: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%) translateY(10px);
-  width: 860px;
-  max-width: calc(100vw - 32px);
+  width: 860px !important;
+  max-width: calc(100vw - 32px) !important;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -727,9 +727,9 @@ button {
 }
 
 .dropdown-inner-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
 }
 
 .dropdown-product-card {

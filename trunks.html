@@ -47,7 +47,13 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=3.5">
+  <style>
+    /* Critical Dropdown 3-Column Layout & Legibility */
+    .nav-dropdown-menu { width: 860px !important; max-width: calc(100vw - 32px) !important; }
+    .dropdown-inner-grid { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1rem !important; }
+    @media (max-width: 1080px) { .nav-dropdown-menu { display: none !important; } }
+  </style>
 </head>
 
 <body>
@@ -140,7 +146,7 @@
                 </a>
 
                 <!-- Trunks & Industrial Storage Item -->
-                <a href="trunks" class="dropdown-product-card" role="menuitem" style="border-color: rgba(245, 158, 11, 0.4); background: #fffdfa;">
+                <a href="trunks" class="dropdown-product-card" role="menuitem">
                   <div class="dp-card-img">
                     <img src="assets/images/steel-trunk.jpg" alt="Heavy Duty Steel Trunks, Metal Petti &amp; Storage Drums">
                   </div>
@@ -781,7 +787,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3.5"></script>
 </body>
 
 </html>

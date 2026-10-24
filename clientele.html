@@ -86,7 +86,13 @@
     rel="stylesheet">
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=3.5">
+  <style>
+    /* Critical Dropdown 3-Column Layout */
+    .nav-dropdown-menu { width: 860px !important; max-width: calc(100vw - 32px) !important; }
+    .dropdown-inner-grid { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1rem !important; }
+    @media (max-width: 1080px) { .nav-dropdown-menu { display: none !important; } }
+  </style>
   <link rel="icon" type="image/png" href="assets/images/cropped-cropped-12-152x76.png">
 </head>
 
@@ -1011,7 +1017,7 @@
   </div>
 
   <!-- JavaScript File -->
-  <script src="script.js"></script>
+  <script src="script.js?v=3.5"></script>
 </body>
 
 </html>
