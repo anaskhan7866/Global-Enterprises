@@ -12,7 +12,7 @@
   --color-primary-hover: #d94814;
   --color-primary-light: rgba(241, 90, 36, 0.12);
   --color-primary-glow: rgba(241, 90, 36, 0.45);
-  
+
   --color-accent-blue: #0ea5e9;
   --color-accent-amber: #f59e0b;
   --color-accent-green: #10b981;
@@ -66,7 +66,9 @@
 /* --------------------------------------------------------------------------
    2. Reset & Base Styles
    -------------------------------------------------------------------------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -89,7 +91,11 @@ body {
   overflow-x: hidden;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
   height: auto;
@@ -101,11 +107,15 @@ a {
   transition: color var(--transition-fast);
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font: inherit;
   color: inherit;
   border: none;
@@ -129,14 +139,37 @@ button {
   padding-right: 1.5rem;
 }
 
-.text-center { text-align: center; }
-.text-orange { color: var(--color-primary); }
-.font-bold { font-weight: 700; }
-.font-semibold { font-weight: 600; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-3 { margin-top: 1rem; }
-.mt-5 { margin-top: 2.5rem; }
-.mb-2 { margin-bottom: 0.5rem; }
+.text-center {
+  text-align: center;
+}
+
+.text-orange {
+  color: var(--color-primary);
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 2.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 
 .sr-only {
   position: absolute;
@@ -163,7 +196,7 @@ button {
   position: relative;
   padding: 5rem 0 3.5rem;
   background: radial-gradient(circle at 80% 20%, rgba(241, 90, 36, 0.12) 0%, transparent 60%),
-              linear-gradient(180deg, #0f1420 0%, #171d2b 100%);
+    linear-gradient(180deg, #0f1420 0%, #171d2b 100%);
   color: #ffffff;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -449,9 +482,20 @@ button {
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(241, 90, 36, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(241, 90, 36, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(241, 90, 36, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(241, 90, 36, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(241, 90, 36, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(241, 90, 36, 0);
+  }
 }
 
 .top-bar-tag {
@@ -1112,7 +1156,7 @@ button {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 75% 30%, rgba(241, 90, 36, 0.18) 0%, transparent 60%),
-              radial-gradient(circle at 15% 80%, rgba(14, 165, 233, 0.12) 0%, transparent 50%);
+    radial-gradient(circle at 15% 80%, rgba(14, 165, 233, 0.12) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -1120,7 +1164,7 @@ button {
   position: absolute;
   inset: 0;
   background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
 }
@@ -1708,7 +1752,7 @@ select.form-control option {
   direction: rtl;
 }
 
-.product-item-card.reverse > * {
+.product-item-card.reverse>* {
   direction: ltr;
 }
 
@@ -2357,7 +2401,7 @@ select.form-control option {
   font-weight: 500;
 }
 
-.form-control.invalid + .error-msg {
+.form-control.invalid+.error-msg {
   display: block;
 }
 
@@ -2373,7 +2417,9 @@ select.form-control option {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .btn.loading .btn-text {
@@ -2736,8 +2782,13 @@ button.whatsapp-submit-btn:hover {
   background-color: var(--color-primary);
 }
 
-.lightbox-nav-btn.prev { left: -70px; }
-.lightbox-nav-btn.next { right: -70px; }
+.lightbox-nav-btn.prev {
+  left: -70px;
+}
+
+.lightbox-nav-btn.next {
+  right: -70px;
+}
 
 /* Video Modal */
 .video-modal {
@@ -2934,10 +2985,12 @@ button.whatsapp-submit-btn:hover {
     font-size: 0.775rem;
     gap: 0.2rem;
   }
+
   .nav-pill-badge {
     padding: 0.1rem 0.35rem;
     font-size: 0.575rem;
   }
+
   .header-quote-btn {
     padding: 0.45rem 0.85rem;
     font-size: 0.775rem;
@@ -2976,8 +3029,13 @@ button.whatsapp-submit-btn:hover {
     justify-content: center;
   }
 
-  .lightbox-nav-btn.prev { left: 10px; }
-  .lightbox-nav-btn.next { right: 10px; }
+  .lightbox-nav-btn.prev {
+    left: 10px;
+  }
+
+  .lightbox-nav-btn.next {
+    right: 10px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3417,9 +3475,11 @@ button.whatsapp-submit-btn:hover {
   .slider-viewport {
     height: 260px;
   }
+
   .thumb-btn {
     height: 54px;
   }
+
   .slider-btn {
     width: 36px;
     height: 36px;
@@ -3506,8 +3566,8 @@ button.whatsapp-submit-btn:hover {
   position: relative;
   padding: 5.5rem 0 4.5rem;
   background: radial-gradient(circle at 85% 15%, rgba(241, 90, 36, 0.15) 0%, transparent 55%),
-              radial-gradient(circle at 15% 85%, rgba(14, 165, 233, 0.08) 0%, transparent 45%),
-              linear-gradient(180deg, #090c13 0%, #121722 100%);
+    radial-gradient(circle at 15% 85%, rgba(14, 165, 233, 0.08) 0%, transparent 45%),
+    linear-gradient(180deg, #090c13 0%, #121722 100%);
   color: var(--text-white);
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -3914,7 +3974,7 @@ button.whatsapp-submit-btn:hover {
 .client-spotlight-box {
   margin-top: 4rem;
   background: radial-gradient(circle at 10% 20%, rgba(241, 90, 36, 0.12) 0%, transparent 40%),
-              linear-gradient(135deg, rgba(24, 30, 44, 0.9) 0%, rgba(14, 18, 26, 0.95) 100%);
+    linear-gradient(135deg, rgba(24, 30, 44, 0.9) 0%, rgba(14, 18, 26, 0.95) 100%);
   border: 1px solid rgba(241, 90, 36, 0.3);
   border-radius: var(--radius-lg);
   padding: 2.75rem;
@@ -4000,7 +4060,7 @@ button.whatsapp-submit-btn:hover {
 /* Clientele Call to Action Box */
 .clientele-cta-banner {
   background: linear-gradient(135deg, rgba(241, 90, 36, 0.15) 0%, rgba(12, 15, 23, 0.8) 100%),
-              #121724;
+    #121724;
   border: 1px solid rgba(241, 90, 36, 0.35);
   border-radius: var(--radius-lg);
   padding: 3.5rem 3rem;
@@ -4038,9 +4098,11 @@ button.whatsapp-submit-btn:hover {
   .cert-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .clients-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .qa-workflow-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -4051,14 +4113,17 @@ button.whatsapp-submit-btn:hover {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+
   .client-spotlight-box {
     grid-template-columns: 1fr;
     padding: 2rem;
   }
+
   .spotlight-badges {
     flex-direction: row;
     flex-wrap: wrap;
   }
+
   .spotlight-badge {
     flex: 1;
     min-width: 140px;
@@ -4069,32 +4134,41 @@ button.whatsapp-submit-btn:hover {
   .section-title-light {
     font-size: 1.85rem;
   }
+
   .cert-grid {
     grid-template-columns: 1fr;
   }
+
   .clients-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+
   .client-card {
     padding: 1.25rem 0.85rem;
     min-height: 145px;
   }
+
   .qa-workflow-grid {
     grid-template-columns: 1fr;
   }
+
   .clientele-trust-stats {
     grid-template-columns: 1fr;
   }
+
   .clientele-cta-banner {
     padding: 2.5rem 1.5rem;
   }
+
   .clientele-cta-banner h3 {
     font-size: 1.65rem;
   }
+
   .clientele-cta-actions {
     flex-direction: column;
   }
+
   .clientele-cta-actions .btn {
     width: 100%;
   }
