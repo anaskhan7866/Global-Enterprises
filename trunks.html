@@ -3,17 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <script>
-    (function () {
-      try {
-        var p = window.location.pathname;
-        if (p.endsWith('trunks.html')) {
-          var clean = p.replace(/\.html$/, '');
-          window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
-        }
-      } catch (e) {}
-    })();
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heavy Duty Steel Trunks, Metal Petti &amp; Storage Drums | Global Enterprises</title>
   <meta name="description"
@@ -25,6 +14,7 @@
   <meta property="og:title" content="Heavy Duty Steel Trunks, Metal Petti &amp; Storage Drums | Global Enterprises">
   <meta property="og:description"
     content="Heavy-duty industrial steel trunks, traditional metal petti storage boxes, and galvanized drums &amp; kothi. Built with prime 18 to 24 gauge steel sheets, reinforced corners, drop handles, and tamper-resistant padlock hasps.">
+  <meta property="og:url" content="https://globalcorebox.in/trunks">
   <meta property="og:image"
     content="https://globalcorebox.in/assets/images/og-social-preview.jpg">
   <meta property="og:image:secure_url"
@@ -36,6 +26,31 @@
     content="Heavy Duty Steel Trunks and Metal Storage Boxes - Global Enterprises">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://globalcorebox.in/assets/images/og-social-preview.jpg">
+
+  <!-- Schema.org Product JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Heavy Duty Steel Trunks, Metal Petti & Storage Drums",
+    "image": "https://globalcorebox.in/assets/images/steel-trunk.jpg",
+    "description": "Heavy-duty industrial galvanized steel trunks, traditional metal storage petti, and grain storage drums/kothi. Manufactured with 18 to 24 gauge steel sheets.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Global Enterprises"
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Global Enterprises",
+      "url": "https://globalcorebox.in/"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/cropped-cropped-12-152x76.png">
@@ -49,10 +64,6 @@
 
   <link rel="stylesheet" href="style.css?v=3.6">
   <style>
-    /* Critical Dropdown 3-Column Layout & Legibility */
-    .nav-dropdown-menu { width: 860px !important; max-width: calc(100vw - 32px) !important; }
-    .dropdown-inner-grid { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1rem !important; }
-    @media (max-width: 1080px) { .nav-dropdown-menu { display: none !important; } }
 
     /* Specification List Spacing & Alignment */
     .product-spec-table { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.75rem 1.25rem; margin-bottom: 1.5rem; }
@@ -989,6 +1000,22 @@
       <button class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
       <button class="lightbox-nav-btn next" id="lightboxNext" aria-label="Next image">&#10095;</button>
     </div>
+  <!-- Floating Sticky Action Buttons (Scroll-to-top & WhatsApp) -->
+  <div class="floating-actions">
+    <a href="https://wa.me/919521159531?text=Hello%20Global%20Enterprises,%20I%20am%20interested%20in%20your%20Steel%20Trunks%20and%20Storage%20Boxes."
+      target="_blank" rel="noopener noreferrer" class="floating-btn whatsapp-btn" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+        <path
+          d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.42 0-2.82-.37-4.06-1.07l-.29-.17-3.11.82.83-3.03-.19-.3a8.19 8.19 0 01-1.26-4.48c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.02 2.6c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.12-.23-.19-.48-.31z" />
+      </svg>
+      <span class="tooltip">Instant WhatsApp</span>
+    </a>
+
+    <button class="floating-btn scroll-top-btn" id="scrollTopBtn" aria-label="Scroll back to top">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+      </svg>
+    </button>
   </div>
 
   <script src="script.js?v=3.6"></script>

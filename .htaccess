@@ -19,6 +19,7 @@ Options -MultiViews +FollowSymLinks
   # 3. Explicit internal rewrites for product pages
   RewriteRule ^gi-core-boxes/?$ gi-core-boxes.html [L,QSA]
   RewriteRule ^plastic-core-boxes/?$ plastic-core-boxes.html [L,QSA]
+  RewriteRule ^trunks/?$ trunks.html [L,QSA]
   RewriteRule ^clientele/?$ clientele.html [L,QSA]
 
   # 4. General internal rewrite: silently serve any existing .html file without extension
@@ -27,6 +28,16 @@ Options -MultiViews +FollowSymLinks
   RewriteRule ^(.*)/?$ $1.html [L,QSA]
 </IfModule>
 
+# Security Headers (Clickjacking, MIME-sniffing, Referrer & CSP protections)
+<IfModule mod_headers.c>
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.whatsapp.com; frame-ancestors 'self';"
+</IfModule>
+
 # Custom 404 Error Document
 ErrorDocument 404 /404.html
+
 

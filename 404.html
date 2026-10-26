@@ -2,27 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Global Enterprises</title>
+  <meta name="description" content="The requested page could not be found. Browse our Galvanized Steel Core Boxes, Plastic Core Trays, and Storage Trunks.">
+  <link rel="icon" type="image/png" href="assets/images/cropped-cropped-12-152x76.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3.6">
+
+  <!-- Safe Path Normalization & Canonical Redirect -->
   <script>
     (function() {
-      var path = window.location.pathname;
-      var search = window.location.search || '';
-      var hash = window.location.hash || '';
+      try {
+        var path = window.location.pathname.toLowerCase();
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
 
-      if (path.indexOf('plastic-core-boxes') !== -1) {
-        window.location.replace('plastic-core-boxes' + search + hash);
-      } else if (path.indexOf('gi-core-boxes') !== -1 || path.indexOf('core-boxes') !== -1) {
-        window.location.replace('gi-core-boxes' + search + hash);
-      } else if (path.indexOf('trunks') !== -1) {
-        window.location.replace('trunks' + search + hash);
-      } else if (path.indexOf('clientele') !== -1) {
-        window.location.replace('clientele' + search + hash);
-      } else {
-        window.location.replace('index.html');
-      }
+        // Only redirect if not already at the clean destination
+        if ((path.indexOf('plastic-core-boxes') !== -1 || path.indexOf('plastic-core') !== -1) && path !== '/plastic-core-boxes') {
+          window.location.replace('/plastic-core-boxes' + search + hash);
+        } else if ((path.indexOf('gi-core-boxes') !== -1 || path.indexOf('core-boxes') !== -1) && path !== '/gi-core-boxes') {
+          window.location.replace('/gi-core-boxes' + search + hash);
+        } else if (path.indexOf('trunks') !== -1 && path !== '/trunks') {
+          window.location.replace('/trunks' + search + hash);
+        } else if (path.indexOf('clientele') !== -1 && path !== '/clientele') {
+          window.location.replace('/clientele' + search + hash);
+        }
+      } catch (e) {}
     })();
   </script>
+
+  <style>
+    .error-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .error-card {
+      max-width: 640px;
+      margin: 0 auto;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg, 16px);
+      padding: 3rem 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .error-code {
+      font-size: clamp(4rem, 12vw, 7rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #f15a24 0%, #ff8c5a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .error-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #f8fafc;
+    }
+    .error-desc {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .error-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .error-quick-links {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+    .error-quick-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .error-quick-links a:hover {
+      color: #f15a24;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Header / Minimal Navigation -->
+  <header class="main-header" style="position: relative; background: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.08);">
+    <div class="container header-container">
+      <a href="/" class="brand-logo" aria-label="Global Enterprises Home">
+        <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="brand-logo-img">
+      </a>
+      <a href="tel:+919521159531" class="header-quote-btn" style="padding: 0.5rem 1.25rem;">
+        <span>Call: +91-95211-59531</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 404 Visual Content Section -->
+  <main class="error-hero">
+    <div class="container">
+      <div class="error-card">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-desc">
+          The requested page could not be located. It may have been moved, renamed, or you may have entered an outdated address. Explore our main exploration drilling products below:
+        </p>
+
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary btn-lg">Back to Homepage &rarr;</a>
+          <a href="https://wa.me/919521159531?text=Hello%20Global%20Enterprises,%20I%20need%20help%20locating%20a%20product%20on%20your%20website." target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg" style="background: #25d366; color: #ffffff; border-color: #25d366;">
+            Chat on WhatsApp
+          </a>
+        </div>
+
+        <div class="error-quick-links">
+          <a href="/gi-core-boxes">GI Core Boxes (All Models)</a>
+          <span>&bull;</span>
+          <a href="/plastic-core-boxes">Plastic Core Trays</a>
+          <span>&bull;</span>
+          <a href="/trunks">Steel Trunks &amp; Petti</a>
+          <span>&bull;</span>
+          <a href="/clientele">Clientele &amp; Certifications</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background: #0b1120; color: #64748b; padding: 2rem 1rem; text-align: center; font-size: 0.875rem;">
+    <div class="container">
+      <p>&copy; 2026 <strong>Global Enterprises</strong> (globalcorebox.in). All Rights Reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>

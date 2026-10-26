@@ -158,11 +158,37 @@ document.addEventListener('DOMContentLoaded', () => {
       const messageInput = document.getElementById('message');
 
       if (productSelect) {
-        // Attempt to match model option
+        // Attempt to match model option respecting material
+        const isPlastic = trayMaterialSelect && trayMaterialSelect.value === 'plastic';
+        let matched = false;
+
         for (let i = 0; i < productSelect.options.length; i++) {
-          if (productSelect.options[i].value.includes(model)) {
-            productSelect.selectedIndex = i;
-            break;
+          const val = productSelect.options[i].value;
+          if (isPlastic) {
+            if (val.toLowerCase().includes('plastic') && (val.includes(model) || val.includes('Plastic Core Boxes'))) {
+              productSelect.selectedIndex = i;
+              matched = true;
+              break;
+            }
+          } else {
+            if (!val.toLowerCase().includes('plastic') && val.includes(model)) {
+              productSelect.selectedIndex = i;
+              matched = true;
+              break;
+            }
+          }
+        }
+
+        if (!matched) {
+          for (let i = 0; i < productSelect.options.length; i++) {
+            const val = productSelect.options[i].value;
+            if (isPlastic && val.toLowerCase().includes('plastic')) {
+              productSelect.selectedIndex = i;
+              break;
+            } else if (!isPlastic && val.includes(model)) {
+              productSelect.selectedIndex = i;
+              break;
+            }
           }
         }
       }
@@ -259,12 +285,38 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentGalleryList = [];
   let currentLightboxIndex = 0;
 
-  const gatherTriggers = () => {
-    return Array.from(document.querySelectorAll('.lightbox-trigger, .gallery-card img'));
+  const gatherTriggers = (clickedElement) => {
+    if (clickedElement) {
+      // If image is inside a product-slider, scope only to that slider's slides
+      const slider = clickedElement.closest('.product-slider');
+      if (slider) {
+        return Array.from(slider.querySelectorAll('.slider-slide img.lightbox-trigger, .slider-slide img'));
+      }
+      // If clicked inside a specific gallery section, scope to visible items
+      const gallery = clickedElement.closest('.masonry-gallery, .showcase-dual-grid');
+      if (gallery) {
+        return Array.from(gallery.querySelectorAll('.lightbox-trigger, .gallery-card img')).filter(el => {
+          const card = el.closest('.gallery-card');
+          if (card && (card.style.display === 'none' || getComputedStyle(card).display === 'none')) {
+            return false;
+          }
+          return el.offsetParent !== null;
+        });
+      }
+    }
+    // General fallback: only include visible elements
+    return Array.from(document.querySelectorAll('.lightbox-trigger, .gallery-card img')).filter(el => {
+      const card = el.closest('.gallery-card');
+      if (card && (card.style.display === 'none' || getComputedStyle(card).display === 'none')) {
+        return false;
+      }
+      return el.offsetParent !== null;
+    });
   };
 
   const openLightbox = (imgElement) => {
-    currentGalleryList = gatherTriggers();
+    if (!lightboxModal || !imgElement) return;
+    currentGalleryList = gatherTriggers(imgElement);
     currentLightboxIndex = currentGalleryList.indexOf(imgElement);
 
     if (currentLightboxIndex === -1) {
@@ -279,6 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const updateLightboxContent = () => {
+    if (!lightboxImg || !lightboxCaption) return;
     const activeItem = currentGalleryList[currentLightboxIndex];
     if (!activeItem) return;
 
@@ -288,17 +341,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const closeLightbox = () => {
+    if (!lightboxModal) return;
     lightboxModal.classList.remove('active');
     lightboxModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   };
 
   const nextLightboxImage = () => {
+    if (currentGalleryList.length === 0) return;
     currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryList.length;
     updateLightboxContent();
   };
 
   const prevLightboxImage = () => {
+    if (currentGalleryList.length === 0) return;
     currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryList.length) % currentGalleryList.length;
     updateLightboxContent();
   };
@@ -317,9 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lightboxNext) lightboxNext.addEventListener('click', nextLightboxImage);
   if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightboxImage);
 
-  // Keyboard navigation for Lightbox
+  // Keyboard navigation for Lightbox (with defensive guard)
   window.addEventListener('keydown', (e) => {
-    if (!lightboxModal.classList.contains('active')) return;
+    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowRight') nextLightboxImage();
     if (e.key === 'ArrowLeft') prevLightboxImage();
@@ -418,7 +474,21 @@ _Inquiry sent via globalcorebox.in_`;
     const whatsappNumber = '919521159531';
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(waText)}`;
 
-    // Show success alert on page
+    // Helper to safely escape HTML special characters and prevent DOM XSS
+    const escapeHTML = (str) => {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    };
+
+    const safeProduct = escapeHTML(selectedProduct);
+    const safeQty = escapeHTML(orderQty);
+
+    // Show success alert on page with sanitized values
     if (formSuccess) {
       formSuccess.innerHTML = `
         <svg viewBox="0 0 20 20" width="24" height="24" fill="#10b981" style="flex-shrink:0;">
@@ -426,7 +496,7 @@ _Inquiry sent via globalcorebox.in_`;
         </svg>
         <div style="flex:1;">
           <strong style="color:#065f46; font-size:1.05rem; display:block; margin-bottom:0.25rem;">WhatsApp Chat Opened!</strong>
-          <span style="color:#047857; font-size:0.9rem;">Your quotation details for <strong>${selectedProduct} (${orderQty} Units)</strong> have been auto-filled in WhatsApp.</span>
+          <span style="color:#047857; font-size:0.9rem;">Your quotation details for <strong>${safeProduct} (${safeQty} Units)</strong> have been auto-filled in WhatsApp.</span>
           <div style="margin-top:0.75rem;">
             <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-sm" style="background:#25d366; color:#ffffff; font-weight:700; text-transform:none; border-radius:9999px; display:inline-flex; align-items:center; gap:0.5rem; padding:0.5rem 1.25rem; box-shadow:0 3px 10px rgba(37,211,102,0.4);">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.42 0-2.82-.37-4.06-1.07l-.29-.17-3.11.82.83-3.03-.19-.3a8.19 8.19 0 01-1.26-4.48c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.02 2.6c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.12-.23-.19-.48-.31z"/></svg>
@@ -442,9 +512,8 @@ _Inquiry sent via globalcorebox.in_`;
       formError.classList.remove('visible');
     }
 
-    // Open WhatsApp SYNCHRONOUSLY directly from the user's click gesture
-    // (Bypasses popup blocker because it is not delayed by setTimeout)
-    const newWindow = window.open(whatsappUrl, '_blank');
+    // Open WhatsApp SYNCHRONOUSLY directly from the user's click gesture with secure noopener,noreferrer
+    const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
       // In case browser policy forces strict same-tab redirect
       window.location.href = whatsappUrl;
@@ -647,9 +716,19 @@ _Inquiry sent via globalcorebox.in_`;
   const dropdownMenu = document.querySelector('.nav-dropdown-menu');
   if (dropdownToggle && dropdownMenu) {
     dropdownToggle.addEventListener('click', (e) => {
-      if (window.innerWidth <= 1080) {
-        e.preventDefault();
-        dropdownMenu.classList.toggle('touch-open');
+      // On touch devices where desktop nav is visible, tap toggles dropdown
+      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      if (isTouch && window.innerWidth > 1080) {
+        if (!dropdownMenu.classList.contains('touch-open')) {
+          e.preventDefault();
+          dropdownMenu.classList.add('touch-open');
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.remove('touch-open');
       }
     });
   }
