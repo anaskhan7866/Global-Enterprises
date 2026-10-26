@@ -382,17 +382,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -------------------------------------------------------------------------
-  // 5. Live Video Modal
+  // 5. Live Video Modal & 360 NQ Video Handler
   // -------------------------------------------------------------------------
   const videoModal = document.getElementById('videoModal');
   const videoBackdrop = document.getElementById('videoBackdrop');
   const videoClose = document.getElementById('videoClose');
-  const openVideoBtn = document.getElementById('openVideoBtn');
-  const videoBannerTrigger = document.getElementById('videoBannerTrigger');
   const liveVideoPlayer = document.getElementById('liveVideoPlayer');
 
-  const openVideoModal = () => {
+  const openVideoModal = (videoSrc) => {
     if (!videoModal) return;
+    if (liveVideoPlayer && videoSrc && typeof videoSrc === 'string') {
+      const sourceEl = liveVideoPlayer.querySelector('source');
+      if (sourceEl && sourceEl.src !== videoSrc) {
+        sourceEl.src = videoSrc;
+        liveVideoPlayer.load();
+      }
+    }
     videoModal.classList.add('active');
     videoModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -412,8 +417,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  if (openVideoBtn) openVideoBtn.addEventListener('click', openVideoModal);
-  if (videoBannerTrigger) videoBannerTrigger.addEventListener('click', openVideoModal);
+  // Bind all video trigger buttons
+  document.querySelectorAll('#openVideoBtn, #videoBannerTrigger, #openNqVideoBtn, #spotlightVideoBtn, .js-open-video, [data-open-video="true"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const customSrc = btn.getAttribute('data-video-src');
+      openVideoModal(customSrc);
+    });
+  });
+
   if (videoClose) videoClose.addEventListener('click', closeVideoModal);
   if (videoBackdrop) videoBackdrop.addEventListener('click', closeVideoModal);
 
@@ -422,6 +434,64 @@ document.addEventListener('DOMContentLoaded', () => {
       closeVideoModal();
     }
   });
+
+  // -------------------------------------------------------------------------
+  // 5b. NQ Best Seller Media Switcher (Photo Slider vs 360 Video)
+  // -------------------------------------------------------------------------
+  const initNqMediaSwitcher = () => {
+    const switcher = document.querySelector('.media-switcher-tabs');
+    const photoSlider = document.getElementById('nqPhotoSlider');
+    const videoContainer = document.getElementById('nqVideoContainer');
+    const inlineVideo = document.getElementById('nqInlineVideo');
+    if (!switcher || !photoSlider || !videoContainer) return;
+
+    const tabBtns = switcher.querySelectorAll('.media-tab-btn');
+
+    const switchView = (targetView) => {
+      tabBtns.forEach(btn => {
+        if (btn.getAttribute('data-target') === targetView) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      if (targetView === 'video') {
+        photoSlider.style.display = 'none';
+        videoContainer.classList.add('active');
+        videoContainer.style.display = 'block';
+        if (inlineVideo) {
+          inlineVideo.play().catch(() => {});
+        }
+      } else {
+        videoContainer.classList.remove('active');
+        videoContainer.style.display = 'none';
+        photoSlider.style.display = 'block';
+        if (inlineVideo) {
+          inlineVideo.pause();
+        }
+      }
+    };
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetView = btn.getAttribute('data-target');
+        switchView(targetView);
+      });
+    });
+
+    // Also support video thumbnail click in slider to jump directly to 360 video view
+    const videoThumb = document.querySelector('.thumb-btn.video-thumb-btn');
+    if (videoThumb) {
+      videoThumb.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchView('video');
+      });
+    }
+  };
+
+  initNqMediaSwitcher();
 
   // -------------------------------------------------------------------------
   // 6. Contact / RFQ Form - Direct WhatsApp Auto-Fill Action
