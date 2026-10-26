@@ -16,6 +16,11 @@ Options -MultiViews +FollowSymLinks
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^\s\?]+)\.html[\s\?] [NC]
   RewriteRule ^ /%1 [R=301,L,NE]
 
+  # 2b. 301 Redirect old WordPress default pages (like hello-world) to homepage
+  RewriteRule ^hello[-_ ]?world/?$ / [R=301,L,NC]
+  RewriteCond %{QUERY_STRING} ^p=1$ [NC]
+  RewriteRule ^$ /? [R=301,L]
+
   # 3. Explicit internal rewrites for product pages
   RewriteRule ^gi-core-boxes/?$ gi-core-boxes.html [L,QSA]
   RewriteRule ^plastic-core-boxes/?$ plastic-core-boxes.html [L,QSA]

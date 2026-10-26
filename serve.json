@@ -1,5 +1,9 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/hello-world", "destination": "/", "type": 301 },
+    { "source": "/hello-world/**", "destination": "/", "type": 301 }
+  ],
   "rewrites": [
     { "source": "/gi-core-boxes", "destination": "/gi-core-boxes.html" },
     { "source": "/plastic-core-boxes", "destination": "/plastic-core-boxes.html" },
