@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktopNavLinks = document.querySelectorAll('.desktop-nav .nav-link');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
 
-  // Sticky header background transition
+  // Sticky header background transition (throttled with requestAnimationFrame)
+  let isScrolling = false;
   const handleScroll = () => {
     const scrollY = window.scrollY || window.pageYOffset;
     if (mainHeader) {
@@ -37,9 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTopBtn.classList.remove('visible');
       }
     }
+    isScrolling = false;
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (!isScrolling) {
+      window.requestAnimationFrame(handleScroll);
+      isScrolling = true;
+    }
+  }, { passive: true });
   handleScroll();
 
   // Scroll to top action
@@ -72,6 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', () => {
       closeMobileMenu();
     });
+  });
+
+  // Close mobile drawer on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
+      closeMobileMenu();
+    }
   });
 
   // Active Navigation link on scroll (IntersectionObserver)
@@ -146,11 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Transfer Calculated Values to RFQ Form
   if (applyCalcToQuoteBtn) {
     applyCalcToQuoteBtn.addEventListener('click', () => {
-      const meters = metersDrilledInput.value;
-      const model = drillModelSelect.value;
-      const material = trayMaterialSelect.value === 'plastic' ? 'Plastic' : 'Galvanized Steel';
-      const trays = calcTraysCount.textContent;
-      const weight = calcTotalWeight.textContent;
+      const meters = metersDrilledInput ? metersDrilledInput.value : '';
+      const model = drillModelSelect ? drillModelSelect.value : '';
+      const isPlastic = trayMaterialSelect && trayMaterialSelect.value === 'plastic';
+      const material = isPlastic ? 'Plastic' : 'Galvanized Steel';
+      const trays = calcTraysCount ? calcTraysCount.textContent : '';
+      const weight = calcTotalWeight ? calcTotalWeight.textContent : '';
 
       // Fill in contact form fields
       const productSelect = document.getElementById('productSelect');
@@ -314,8 +329,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  let lastLightboxTrigger = null;
+
   const openLightbox = (imgElement) => {
     if (!lightboxModal || !imgElement) return;
+    lastLightboxTrigger = document.activeElement;
     currentGalleryList = gatherTriggers(imgElement);
     currentLightboxIndex = currentGalleryList.indexOf(imgElement);
 
@@ -328,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxModal.classList.add('active');
     lightboxModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    if (lightboxClose) lightboxClose.focus();
   };
 
   const updateLightboxContent = () => {
@@ -345,6 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxModal.classList.remove('active');
     lightboxModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastLightboxTrigger && typeof lastLightboxTrigger.focus === 'function') {
+      lastLightboxTrigger.focus();
+    }
   };
 
   const nextLightboxImage = () => {
@@ -389,18 +411,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoClose = document.getElementById('videoClose');
   const liveVideoPlayer = document.getElementById('liveVideoPlayer');
 
+  let lastVideoTrigger = null;
+
   const openVideoModal = (videoSrc) => {
     if (!videoModal) return;
+    lastVideoTrigger = document.activeElement;
     if (liveVideoPlayer && videoSrc && typeof videoSrc === 'string') {
       const sourceEl = liveVideoPlayer.querySelector('source');
-      if (sourceEl && sourceEl.src !== videoSrc) {
-        sourceEl.src = videoSrc;
-        liveVideoPlayer.load();
+      if (sourceEl) {
+        const currentSrc = sourceEl.getAttribute('src');
+        if (currentSrc !== videoSrc && sourceEl.src !== videoSrc) {
+          sourceEl.src = videoSrc;
+          liveVideoPlayer.load();
+        }
       }
     }
     videoModal.classList.add('active');
     videoModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    if (videoClose) videoClose.focus();
     if (liveVideoPlayer) {
       liveVideoPlayer.currentTime = 0;
       liveVideoPlayer.play().catch(() => {});
@@ -414,6 +443,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
     if (liveVideoPlayer) {
       liveVideoPlayer.pause();
+    }
+    if (lastVideoTrigger && typeof lastVideoTrigger.focus === 'function') {
+      lastVideoTrigger.focus();
     }
   };
 

@@ -207,7 +207,7 @@
           </svg>
         </a>
 
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Mobile Menu" aria-expanded="false">
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle Mobile Menu" aria-expanded="false">
           <span class="bar bar-1"></span>
           <span class="bar bar-2"></span>
           <span class="bar bar-3"></span>
@@ -222,7 +222,7 @@
       <div class="drawer-brand">
         <img src="assets/images/cropped-cropped-12-300x151.png" alt="Global Enterprises Logo" class="drawer-logo-img">
       </div>
-      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+      <button type="button" class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
     <ul class="mobile-nav-list">
       <li><a href="/#hero" class="mobile-nav-link">Home</a></li>
@@ -992,14 +992,16 @@
   <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
     <div class="lightbox-container">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close fullscreen preview">&times;</button>
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close fullscreen preview">&times;</button>
       <div class="lightbox-content">
         <img src="" alt="" id="lightboxImg" class="lightbox-image">
         <div class="lightbox-caption" id="lightboxCaption"></div>
       </div>
-      <button class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
-      <button class="lightbox-nav-btn next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+      <button type="button" class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+      <button type="button" class="lightbox-nav-btn next" id="lightboxNext" aria-label="Next image">&#10095;</button>
     </div>
+  </div>
+
   <!-- Floating Sticky Action Buttons (Scroll-to-top & WhatsApp) -->
   <div class="floating-actions">
     <a href="https://wa.me/919521159531?text=Hello%20Global%20Enterprises,%20I%20am%20interested%20in%20your%20Steel%20Trunks%20and%20Storage%20Boxes."
@@ -1011,7 +1013,7 @@
       <span class="tooltip">Instant WhatsApp</span>
     </a>
 
-    <button class="floating-btn scroll-top-btn" id="scrollTopBtn" aria-label="Scroll back to top">
+    <button type="button" class="floating-btn scroll-top-btn" id="scrollTopBtn" aria-label="Scroll back to top">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
         <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
       </svg>

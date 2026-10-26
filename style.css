@@ -4351,6 +4351,8 @@ button.whatsapp-submit-btn:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin-bottom: 0.85rem;
   padding: 0 0.35rem;
 }
@@ -4774,5 +4776,31 @@ button.whatsapp-submit-btn:hover {
 
   .nq-inline-video {
     height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .best-seller-title {
+    font-size: 1.45rem;
+  }
+
+  .video-status-tag {
+    font-size: 0.7rem;
+  }
+
+  .video-dimension-badge {
+    font-size: 0.68rem;
+  }
+
+  .v-spec-pill .pill-val {
+    font-size: 0.95rem;
+  }
+
+  .v-spec-pill .pill-lbl {
+    font-size: 0.68rem;
+  }
+
+  .nq-inline-video {
+    height: 230px;
   }
 }
