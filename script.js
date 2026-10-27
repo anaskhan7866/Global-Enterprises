@@ -88,6 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Responsive reset: ensure mobile drawer closes and restores body scroll if resizing to desktop
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth > 1080 && mobileDrawer && mobileDrawer.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    }, 150);
+  }, { passive: true });
+
   // Active Navigation link on scroll (IntersectionObserver)
   const sections = document.querySelectorAll('section[id], header[id]');
   const observerOptions = {

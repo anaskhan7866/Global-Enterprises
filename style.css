@@ -735,9 +735,9 @@ button {
 .nav-dropdown-menu {
   position: absolute;
   top: calc(100% + 14px);
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  width: 860px !important;
+  left: -80px;
+  transform: translateY(10px);
+  width: 820px !important;
   max-width: calc(100vw - 32px) !important;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
@@ -768,7 +768,7 @@ button {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .dropdown-inner-grid {
@@ -1281,6 +1281,7 @@ button {
 /* Hero Visual Card */
 .hero-visual-card {
   position: relative;
+  overflow: hidden;
   background: linear-gradient(145deg, #1b212e 0%, #111520 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-lg);
@@ -1480,7 +1481,7 @@ button {
   width: 100%;
   height: 380px;
   overflow: hidden;
-  background-color: #e2e8f0;
+  background-color: #f2f2f4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1491,6 +1492,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform var(--transition-slow);
 }
 
@@ -2954,7 +2956,7 @@ button.whatsapp-submit-btn:hover {
   right: -70px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .lightbox-nav-btn.prev {
     left: 8px;
   }
@@ -3142,41 +3144,6 @@ button.whatsapp-submit-btn:hover {
 /* --------------------------------------------------------------------------
    21. Responsive Media Queries
    -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
-  .hero-container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .hero-visual {
-    max-width: 540px;
-    margin: 0 auto;
-  }
-
-  .calculator-wrapper {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .masonry-gallery {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .footer-top-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-}
-
 @media (max-width: 1220px) {
   .nav-link {
     padding: 0.35rem 0.55rem;
@@ -3212,10 +3179,15 @@ button.whatsapp-submit-btn:hover {
   .product-item-card.reverse {
     grid-template-columns: 1fr;
     gap: 2rem;
+    direction: ltr;
   }
 
   .showcase-dual-grid {
     grid-template-columns: 1fr;
+  }
+
+  .showcase-img-wrap {
+    height: 320px;
   }
 
   .brochure-container {
@@ -3233,6 +3205,56 @@ button.whatsapp-submit-btn:hover {
 
   .lightbox-nav-btn.next {
     right: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-visual {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .calculator-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .masonry-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-top-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .masonry-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calc-results-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
   }
 }
 
@@ -3380,6 +3402,10 @@ button.whatsapp-submit-btn:hover {
   .masonry-gallery {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .showcase-img-wrap {
+    height: 260px;
   }
 
   .calc-card,
