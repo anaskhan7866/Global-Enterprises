@@ -4329,6 +4329,9 @@ button.whatsapp-submit-btn:hover {
 }
 
 @media (max-width: 680px) {
+  .product-item-card.best-seller-card {
+    padding-top: 5.25rem;
+  }
   .section-title-light {
     font-size: 1.85rem;
   }
@@ -4777,6 +4780,7 @@ button.whatsapp-submit-btn:hover {
   text-transform: uppercase;
   border-top-left-radius: calc(var(--radius-lg) - 2px);
   border-top-right-radius: calc(var(--radius-lg) - 2px);
+  z-index: 5;
 }
 
 .ribbon-main {
@@ -4943,6 +4947,10 @@ button.whatsapp-submit-btn:hover {
 
   .best-seller-title {
     font-size: 2.15rem;
+  }
+
+  .product-item-card.best-seller-card {
+    padding-top: 4.75rem;
   }
 
   .best-seller-top-ribbon {
