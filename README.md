@@ -67,12 +67,14 @@ Global-ENT/
 
 You can preview the website using any standard local web server:
 
-### Option 1: Using Node.js (Built-in)
-Run the following in PowerShell / Terminal:
+### Option 1: Using the Built-in Server (Recommended)
+Supports clean URLs (`/gi-core-boxes`, `/plastic-core-boxes`, `/trunks`, `/clientele`) and automatic MIME resolution:
 ```bash
-node -e "const http=require('http'), fs=require('fs'), path=require('path'); const server=http.createServer((req,res)=>{ let fp = path.join('.', req.url === '/' ? 'index.html' : req.url.split('?')[0]); if(!fs.existsSync(fp) || fs.statSync(fp).isDirectory()) { res.writeHead(404); res.end('Not found'); return; } const ext = path.extname(fp).toLowerCase(); const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml' }; res.writeHead(200, { 'Content-Type': mime[ext] || 'application/octet-stream' }); fs.createReadStream(fp).pipe(res); }); server.listen(3000, () => console.log('Server running on http://localhost:3000'));"
+npm start
+# or
+node server.js
 ```
-Then open `http://localhost:3000` in your web browser.
+Then open [http://localhost:3000](http://localhost:3000) in your web browser.
 
 ### Option 2: Using VS Code Live Server
 Right-click `index.html` and click **"Open with Live Server"**.

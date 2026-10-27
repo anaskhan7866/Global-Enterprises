@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // -------------------------------------------------------------------------
-  // 3. Gallery Filter Chips
+  // 3. Gallery Filter Chips (Smooth Transition & Active State)
   // -------------------------------------------------------------------------
   const filterChips = document.querySelectorAll('.filter-chip');
   const galleryCards = document.querySelectorAll('.gallery-card');
@@ -263,35 +263,52 @@ document.addEventListener('DOMContentLoaded', () => {
   filterChips.forEach(chip => {
     chip.addEventListener('click', () => {
       const filter = chip.getAttribute('data-filter');
+      if (chip.classList.contains('active')) return;
 
-      filterChips.forEach(c => c.classList.remove('active'));
+      filterChips.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-selected', 'false');
+      });
       chip.classList.add('active');
+      chip.setAttribute('aria-selected', 'true');
 
+      // Phase 1: Smooth fade out non-matching cards
       galleryCards.forEach(card => {
         const category = card.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
-          card.style.display = 'block';
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'scale(1)';
-          }, 50);
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 250);
+        const matches = filter === 'all' || category === filter;
+        if (!matches) {
+          card.classList.remove('filtering-in');
+          card.classList.add('filtering-out');
         }
       });
+
+      // Phase 2: After transition, re-flow layout and fade in matching cards
+      setTimeout(() => {
+        galleryCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          const matches = filter === 'all' || category === filter;
+          if (matches) {
+            card.style.display = 'block';
+            card.classList.remove('filtering-out');
+            card.classList.add('filtering-in');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }, 200);
     });
   });
 
   // -------------------------------------------------------------------------
-  // 4. Fullscreen Lightbox Modal
+  // 4. Fullscreen Lightbox Modal (Keyboard, Touch Swipe, High-Res Zoom)
   // -------------------------------------------------------------------------
   const lightboxModal = document.getElementById('lightboxModal');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+  const lightboxCategoryTag = document.getElementById('lightboxCategoryTag');
+  const lightboxCounter = document.getElementById('lightboxCounter');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxBackdrop = document.getElementById('lightboxBackdrop');
   const lightboxPrev = document.getElementById('lightboxPrev');
@@ -312,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (gallery) {
         return Array.from(gallery.querySelectorAll('.lightbox-trigger, .gallery-card img')).filter(el => {
           const card = el.closest('.gallery-card');
-          if (card && (card.style.display === 'none' || getComputedStyle(card).display === 'none')) {
+          if (card && (card.style.display === 'none' || getComputedStyle(card).display === 'none' || card.classList.contains('filtering-out'))) {
             return false;
           }
           return el.offsetParent !== null;
@@ -322,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // General fallback: only include visible elements
     return Array.from(document.querySelectorAll('.lightbox-trigger, .gallery-card img')).filter(el => {
       const card = el.closest('.gallery-card');
-      if (card && (card.style.display === 'none' || getComputedStyle(card).display === 'none')) {
+      if (card && (card.style.display === 'none' || getComputedStyle(card).display === 'none' || card.classList.contains('filtering-out'))) {
         return false;
       }
       return el.offsetParent !== null;
@@ -330,6 +347,50 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   let lastLightboxTrigger = null;
+
+  const updateLightboxContent = () => {
+    if (!lightboxImg) return;
+    const activeItem = currentGalleryList[currentLightboxIndex];
+    if (!activeItem) return;
+
+    // Smooth image transition
+    lightboxImg.style.opacity = '0.4';
+    lightboxImg.style.transform = 'scale(0.97)';
+
+    const imgSrc = activeItem.src || activeItem.getAttribute('src');
+    const title = activeItem.getAttribute('data-title') || activeItem.getAttribute('alt') || 'Global Enterprises';
+    const category = activeItem.getAttribute('data-category') || 'Visual Showcase';
+    const desc = activeItem.getAttribute('data-desc') || '';
+
+    lightboxImg.src = imgSrc;
+    lightboxImg.alt = title;
+
+    if (lightboxTitle) lightboxTitle.textContent = title;
+    if (lightboxCategoryTag) lightboxCategoryTag.textContent = category;
+    if (lightboxDesc) {
+      lightboxDesc.textContent = desc;
+      lightboxDesc.style.display = desc ? 'block' : 'none';
+    }
+    if (lightboxCaption) lightboxCaption.textContent = title;
+    if (lightboxCounter) {
+      lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentGalleryList.length}`;
+    }
+
+    // Preload next and previous images for instantaneous response
+    if (currentGalleryList.length > 1) {
+      const nextIdx = (currentLightboxIndex + 1) % currentGalleryList.length;
+      const prevIdx = (currentLightboxIndex - 1 + currentGalleryList.length) % currentGalleryList.length;
+      const nextImg = new Image();
+      nextImg.src = currentGalleryList[nextIdx].src || currentGalleryList[nextIdx].getAttribute('src');
+      const prevImg = new Image();
+      prevImg.src = currentGalleryList[prevIdx].src || currentGalleryList[prevIdx].getAttribute('src');
+    }
+
+    setTimeout(() => {
+      lightboxImg.style.opacity = '1';
+      lightboxImg.style.transform = 'scale(1)';
+    }, 40);
+  };
 
   const openLightbox = (imgElement) => {
     if (!lightboxModal || !imgElement) return;
@@ -347,16 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     if (lightboxClose) lightboxClose.focus();
-  };
-
-  const updateLightboxContent = () => {
-    if (!lightboxImg || !lightboxCaption) return;
-    const activeItem = currentGalleryList[currentLightboxIndex];
-    if (!activeItem) return;
-
-    lightboxImg.src = activeItem.src || activeItem.getAttribute('src');
-    const title = activeItem.getAttribute('data-title') || activeItem.getAttribute('alt') || 'Global Enterprises';
-    lightboxCaption.textContent = title;
   };
 
   const closeLightbox = () => {
@@ -395,13 +446,45 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lightboxNext) lightboxNext.addEventListener('click', nextLightboxImage);
   if (lightboxPrev) lightboxPrev.addEventListener('click', prevLightboxImage);
 
-  // Keyboard navigation for Lightbox (with defensive guard)
+  // Keyboard navigation for Lightbox
   window.addEventListener('keydown', (e) => {
     if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowRight') nextLightboxImage();
     if (e.key === 'ArrowLeft') prevLightboxImage();
   });
+
+  // Mobile Touchscreen Swipe Navigation
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+
+  if (lightboxModal) {
+    lightboxModal.addEventListener('touchstart', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }
+    }, { passive: true });
+
+    lightboxModal.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        // Verify horizontal swipe exceeds threshold and is greater than vertical movement
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+          if (diffX < 0) {
+            nextLightboxImage(); // Swipe left to next image
+          } else {
+            prevLightboxImage(); // Swipe right to previous image
+          }
+        }
+      }
+    }, { passive: true });
+  }
 
   // -------------------------------------------------------------------------
   // 5. Live Video Modal & 360 NQ Video Handler
